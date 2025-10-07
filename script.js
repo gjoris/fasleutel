@@ -148,29 +148,32 @@ document.addEventListener('DOMContentLoaded', () => {
             return el;
         }
 
-        renderMini(note, targetSvgElement, scale = 0.8) {
+        renderMini(note, targetSvgElement) {
             targetSvgElement.innerHTML = '';
-            const originalWidth = 400;
-            const originalHeight = 200;
+            const miniWidth = 150; // Fixed width for the mini staff SVG
+            const miniHeight = 100; // Fixed height for the mini staff SVG
 
-            targetSvgElement.setAttribute('width', originalWidth * scale);
-            targetSvgElement.setAttribute('height', originalHeight * scale);
-            targetSvgElement.setAttribute('viewBox', `0 0 ${originalWidth} ${originalHeight}`); // Maintain aspect ratio
+            targetSvgElement.setAttribute('width', miniWidth);
+            targetSvgElement.setAttribute('height', miniHeight);
+            targetSvgElement.setAttribute('viewBox', `0 0 ${miniWidth} ${miniHeight}`); // 1:1 scaling
 
-            const scaledLineGap = this.STAFF_LINE_GAP * scale;
-            const scaledBaseY = this.STAFF_BASE_Y * scale;
-            const scaledNoteX = 200 * scale;
-            const scaledClefX = (scaledNoteX - 60 * scale); // Clef closer to note
-            const scaledNoteRx = 8 * scale;
-            const scaledNoteRy = 6 * scale;
-            const scaledClefFontSize = (note.clef === 'g' ? 70 : 48) * scale;
+            // Use smaller internal drawing units for the mini staff
+            const miniStaffLineGap = 9; // 0.75x original gap
+            const miniStaffBaseY = (miniHeight / 2) - (miniStaffLineGap * 2); // Center staff vertically (50 - 18 = 32)
+
+            // Adjust positions based on new gap
+            const miniNoteX = (miniWidth / 2) + 15; // Center X (75 + 15 = 90)
+            const miniClefX = miniNoteX - 30; // Clef closer to note (90 - 30 = 60)
+            const miniNoteRx = 6; // 0.75x original
+            const miniNoteRy = 4.5; // 0.75x original
+            const miniClefFontSize = (note.clef === 'g' ? 70 : 48) * 0.75; // 0.75x original font size
 
             // Draw 5 staff lines
             for (let i = 0; i < this.STAFF_LINES; i++) {
-                const y = scaledBaseY + i * scaledLineGap;
+                const y = miniStaffBaseY + i * miniStaffLineGap;
                 const line = this._createElementNS('line', {
-                    x1: (scaledNoteX - 30 * scale), y1: y, x2: (scaledNoteX + 30 * scale), y2: y, // Shorter lines
-                    stroke: '#000000', 'stroke-width': 1 * scale
+                    x1: miniClefX - 10, y1: y, x2: miniNoteX + 10, y2: y, // Shorter lines around clef and note
+                    stroke: '#000000', 'stroke-width': 1 // Thinner lines
                 });
                 targetSvgElement.appendChild(line);
             }
@@ -178,28 +181,28 @@ document.addEventListener('DOMContentLoaded', () => {
             // Draw clef
             const clefChar = note.clef === 'g' ? '𝄞' : '𝄢';
             const clefY = note.clef === 'g'
-                ? scaledBaseY + 3.8 * scaledLineGap
-                : scaledBaseY + 2.9 * scaledLineGap;
+                ? miniStaffBaseY + 3.8 * miniStaffLineGap
+                : miniStaffBaseY + 2.9 * miniStaffLineGap;
 
             const clefText = this._createElementNS('text', {
-                x: scaledClefX, y: clefY, fill: '#000000', 'font-size': `${scaledClefFontSize}px`
+                x: miniClefX, y: clefY, fill: '#000000', 'font-size': `${miniClefFontSize}px`
             });
             clefText.textContent = clefChar;
             targetSvgElement.appendChild(clefText);
 
             // Draw note
-            const noteY = scaledBaseY + (scaledLineGap * 2) + (note.y * scaledLineGap);
+            const noteY = miniStaffBaseY + (miniStaffLineGap * 2) + (note.y * miniStaffLineGap);
             const noteHead = this._createElementNS('ellipse', {
-                cx: scaledNoteX, cy: noteY, rx: scaledNoteRx, ry: scaledNoteRy, fill: '#000000'
+                cx: miniNoteX, cy: noteY, rx: miniNoteRx, ry: miniNoteRy, fill: '#000000'
             });
             targetSvgElement.appendChild(noteHead);
 
             // Draw ledger lines
             const drawLine = (y_pos) => {
-                const ledgerLineY = scaledBaseY + (scaledLineGap * 2) + (y_pos * scaledLineGap);
+                const ledgerLineY = miniStaffBaseY + (miniStaffLineGap * 2) + (y_pos * miniStaffLineGap);
                 const ledgerLine = this._createElementNS('line', {
-                    x1: (scaledNoteX - 15 * scale), y1: ledgerLineY, x2: (scaledNoteX + 15 * scale), y2: ledgerLineY, // Shorter ledger lines
-                    stroke: '#000000', 'stroke-width': 1.5 * scale
+                    x1: miniNoteX - 8, y1: ledgerLineY, x2: miniNoteX + 8, y2: ledgerLineY, // Proportional width
+                    stroke: '#000000', 'stroke-width': 1.0 // Proportional thickness
                 });
                 targetSvgElement.appendChild(ledgerLine);
             };
@@ -254,6 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('report-to-menu').addEventListener('click', handler);
         }
 
+        bindDebugReport(handler) {
+            document.getElementById('debug-report-button').addEventListener('click', handler);
+        }
+
         bindAnswer(handler) {
             this.answerButtonsContainer.addEventListener('click', (event) => {
                 if (event.target.tagName === 'BUTTON') {
@@ -306,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     listItem.appendChild(svgContainer);
 
                     const noteText = document.createElement('span');
-                    noteText.textContent = `${problemData.note.name}${problemData.note.octave} (${problemData.count} keer fout)`;
+                    noteText.textContent = `${problemData.note.name} (${problemData.count} keer fout)`;
                     listItem.appendChild(noteText);
 
                     this.problemNotesList.appendChild(listItem);
@@ -382,6 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.uiView.bindRestartGame(() => this.startGame(this.gameMode, this.currentClef));
             this.uiView.bindReportToMenu(this.resetApp.bind(this));
             this.uiView.bindAnswer(this.handleAnswer.bind(this));
+            this.uiView.bindDebugReport(this.showDebugReport.bind(this)); // Bind debug button
         }
 
         startGame(mode, clef) {
@@ -460,6 +468,20 @@ document.addEventListener('DOMContentLoaded', () => {
             this.uiView.toggleAnswerButtons(false);
         }
 
+        showDebugReport() {
+            // Voorbeelddata voor debugging
+            this.score = 10;
+            this.totalQuestions = 20;
+            this.incorrectAnswers = {
+                "Do_4_g": { note: { name: 'Do', octave: 4, y: 3, clef: 'g' }, count: 3 },
+                "Fa_5_g": { note: { name: 'Fa', octave: 5, y: -2, clef: 'g' }, count: 2 },
+                "Mi_2_f": { note: { name: 'Mi', octave: 2, y: 3, clef: 'f' }, count: 4 },
+                "La_1_f": { note: { name: 'La', octave: 1, y: 5, clef: 'f' }, count: 1 },
+                "Si_4_g": { note: { name: 'Si', octave: 4, y: 0, clef: 'g' }, count: 5 }
+            };
+            this.endGame();
+        }
+
         _startTimer() {
             this.timeLeft = this.TIME_LIMIT;
             this.uiView.updateTimer(this.timeLeft);
@@ -485,6 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const staffView = new StaffView(document.getElementById('staff'));
     const uiView = new UIView();
     const app = new QuizController(noteService, staffView, uiView);
+
+    window.app = app; // Maak app globaal toegankelijk voor debugging
 
     app.init();
 });
