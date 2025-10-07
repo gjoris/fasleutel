@@ -286,6 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.STAFF_LINE_GAP = 12;
             this.STAFF_LINES = 5;
             this.STAFF_BASE_Y = 100;
+            this.svg.setAttribute('viewBox', '0 0 400 200'); // Default viewBox for main staff
         }
 
         render(note) {
