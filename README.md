@@ -35,10 +35,6 @@ Deze applicatie is gebouwd met de volgende technologieën:
 
 De applicatie ondersteunt meerdere talen. Je kunt de taal wijzigen via het dropdown-menu rechtsboven in het hoofdmenu. Klik op het vlag-icoon (of de huidige taalcode) en selecteer de gewenste taal.
 
-## 📸 Screenshots
-
-*(Voeg hier screenshots toe van de applicatie in actie. Bijvoorbeeld: hoofdmenu, quizscherm, eindrapport.)*
-
 ## 🤝 Bijdragen
 
 Voel je vrij om bij te dragen aan dit project! Zie de `CONTRIBUTING.md` voor meer informatie. *(Als er geen `CONTRIBUTING.md` is, kan deze sectie worden verwijderd of aangepast.)*
