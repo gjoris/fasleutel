@@ -35,10 +35,6 @@ Deze applicatie is gebouwd met de volgende technologieën:
 
 De applicatie ondersteunt meerdere talen. Je kunt de taal wijzigen via het dropdown-menu rechtsboven in het hoofdmenu. Klik op het vlag-icoon (of de huidige taalcode) en selecteer de gewenste taal.
 
-## 🤝 Bijdragen
-
-Voel je vrij om bij te dragen aan dit project! Zie de `CONTRIBUTING.md` voor meer informatie. *(Als er geen `CONTRIBUTING.md` is, kan deze sectie worden verwijderd of aangepast.)*
-
 ## 📄 Licentie
 
 Dit project is gelicentieerd onder de MIT-licentie. Zie het `LICENSE` bestand voor meer details. *(Als er geen `LICENSE` bestand is, kan deze sectie worden verwijderd of aangepast.)*
