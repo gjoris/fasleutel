@@ -62,8 +62,9 @@ body {
 }
 
 .problem-note-item .mini-staff {
-    width: 150px; /* Further enlarged mini staff */
-    height: 100px; /* Further enlarged mini staff */
+    max-width: 100%; /* Allow it to shrink */
+    width: 120px; /* A bit smaller default, or use vw for more control */
+    height: auto; /* Maintain aspect ratio */
     flex-shrink: 0;
     background-color: #fcfcfc; /* Slightly different background for mini staff */
     border: 1px solid #ededed;
