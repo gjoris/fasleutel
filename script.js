@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const NOTE_NAMES = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
-
     const translations = {
         'nl': {
             'choose_mode': 'Kies een modus',
