@@ -32,7 +32,11 @@ body {
 }
 
 #staff-container svg {
-    /* No need for display: block; margin: 0 auto; anymore, flexbox handles it */
+    max-width: 100%;
+    width: 80vw; /* Adjust as needed for desired narrowness */
+    height: auto;
+    display: block; /* Ensure it behaves as a block element for centering */
+    margin: 0 auto; /* Center the SVG within its container */
 }
 
 /* Report Screen specific styles */
