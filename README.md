@@ -34,7 +34,3 @@ Deze applicatie is gebouwd met de volgende technologieën:
 ## 🌐 Taalwisselaar
 
 De applicatie ondersteunt meerdere talen. Je kunt de taal wijzigen via het dropdown-menu rechtsboven in het hoofdmenu. Klik op het vlag-icoon (of de huidige taalcode) en selecteer de gewenste taal.
-
-## 📄 Licentie
-
-Dit project is gelicentieerd onder de MIT-licentie. Zie het `LICENSE` bestand voor meer details. *(Als er geen `LICENSE` bestand is, kan deze sectie worden verwijderd of aangepast.)*
