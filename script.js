@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'f_clef': 'fa-sleutel',
             'both_clefs': 'beide sleutels',
             'made_with_love': 'Gemaakt met ❤️ voor 🎵.',
-            'github_link_text': 'Bekijk de code op GitHub.',
+            'github_link_prefix': 'Bekijk de code op',
+            'github_text': 'GitHub',
         },
         'en': {
             'choose_mode': 'Choose a mode',
@@ -57,7 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'f_clef': 'f-clef',
             'both_clefs': 'both clefs',
             'made_with_love': 'Made with ❤️ for 🎵.',
-            'github_link_text': 'View code on GitHub.',
+            'github_link_prefix': 'View code on',
+            'github_text': 'GitHub',
         },
         'fr': {
             'choose_mode': 'Choisissez un mode',
@@ -86,7 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'f_clef': 'clé de fa',
             'both_clefs': 'les deux clés',
             'made_with_love': 'Fait avec ❤️ pour 🎵.',
-            'github_link_text': 'Voir le code sur GitHub.',
+            'github_link_prefix': 'Voir le code sur',
+            'github_text': 'GitHub',
         },
         'de': {
             'choose_mode': 'Wählen Sie einen Modus',
@@ -115,7 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'f_clef': 'Bassschlüssel',
             'both_clefs': 'beide Schlüssel',
             'made_with_love': 'Mit ❤️ für 🎵 gemacht.',
-            'github_link_text': 'Code auf GitHub ansehen.',
+            'github_link_prefix': 'Code ansehen auf',
+            'github_text': 'GitHub',
         },
         'it': {
             'choose_mode': 'Scegli una modalità',
@@ -144,7 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'f_clef': 'chiave di basso',
             'both_clefs': 'entrambe le chiavi',
             'made_with_love': 'Fatto con ❤️ per 🎵.',
-            'github_link_text': 'Vedi il codice su GitHub.',
+            'github_link_prefix': 'Vedi il codice su',
+            'github_text': 'GitHub',
         },
         'es': {
             'choose_mode': 'Elige un modo',
@@ -173,9 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'f_clef': 'clave de fa',
             'both_clefs': 'ambas claves',
             'made_with_love': 'Hecho con ❤️ para 🎵.',
-            'github_link_text': 'Ver código en GitHub.',
-        }
-    };
+            'github_link_prefix': 'Ver código en',
+            'github_text': 'GitHub',
 
     let currentLanguage = 'nl'; // Default language
 
