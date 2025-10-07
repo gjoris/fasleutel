@@ -5,6 +5,7 @@
 Welkom bij de Muzieknoten Quiz! Deze interactieve webapplicatie is ontworpen om je te helpen de noten in de sol- en fa-sleutel te leren en te oefenen. Of je nu een beginner bent of je kennis wilt opfrissen, deze quiz biedt verschillende modi om je vaardigheden te verbeteren.
 
 De code voor deze applicatie is te vinden op: [https://github.com/gjoris/fasleutel](https://github.com/gjoris/fasleutel)
+De live versie van deze applicatie is beschikbaar als GitHub Page: [https://gjoris.github.io/fasleutel/](https://gjoris.github.io/fasleutel/)
 
 ## ✨ Kenmerken
 
