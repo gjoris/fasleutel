@@ -310,10 +310,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         _drawClef(note) {
             const clefChar = note.clef === 'g' ? '𝄞' : '𝄢';
+            // Adjust clefY to be relative to the staff lines and viewBox
             const clefY = note.clef === 'g'
-                ? this.STAFF_BASE_Y + 3.8 * this.STAFF_LINE_GAP
-                : this.STAFF_BASE_Y + 2.9 * this.STAFF_LINE_GAP;
-            const clefSize = note.clef === 'g' ? '70px' : '48px';
+                ? this.STAFF_BASE_Y + 3.8 * this.STAFF_LINE_GAP - 5 // Adjusted for better visual alignment
+                : this.STAFF_BASE_Y + 2.9 * this.STAFF_LINE_GAP + 5; // Adjusted for better visual alignment
+            const clefSize = note.clef === 'g' ? 70 : 48; // Unitless for SVG scaling
 
             const clefText = this._createElementNS('text', {
                 x: '20', y: clefY, fill: '#000000', 'font-size': clefSize
