@@ -1,5 +1,7 @@
 # 🎶 Muzieknoten Quiz: Leer de Sol- en Fa-sleutel
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/gjoris/fasleutel)
+
 Welkom bij de Muzieknoten Quiz! Deze interactieve webapplicatie is ontworpen om je te helpen de noten in de sol- en fa-sleutel te leren en te oefenen. Of je nu een beginner bent of je kennis wilt opfrissen, deze quiz biedt verschillende modi om je vaardigheden te verbeteren.
 
 ## ✨ Kenmerken
