@@ -22,20 +22,6 @@ Deze applicatie is gebouwd met de volgende technologieën:
 *   **SVG:** Voor het dynamisch tekenen van de notenbalk en noten.
 *   **Material Icons:** Voor de iconen in de gebruikersinterface.
 
-## 🛠️ Installatie en Setup
-
-Om deze applicatie lokaal te draaien, volg je deze stappen:
-
-1.  **Kloon de repository:**
-    ```bash
-    git clone https://github.com/jouwgebruikersnaam/muzieknoten-quiz.git
-    cd muzieknoten-quiz
-    ```
-    *(Vervang `https://github.com/jouwgebruikersnaam/muzieknoten-quiz.git` met de daadwerkelijke URL van de repository als deze bestaat.)*
-
-2.  **Open `index.html`:**
-    Open het `index.html` bestand in je favoriete webbrowser. Er is geen server nodig om de applicatie te draaien, aangezien het een pure frontend-applicatie is.
-
 ## 🎮 Hoe te Spelen
 
 1.  **Kies een Modus:** Selecteer op het startscherm een van de drie spelmodi (Oefenmodus, Tijdrace, Sprint) en de gewenste sleutel (sol-sleutel, fa-sleutel, of beide).
