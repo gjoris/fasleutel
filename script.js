@@ -1,5 +1,199 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const NOTE_NAMES = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
+
+    const translations = {
+        'nl': {
+            'choose_mode': 'Kies een modus',
+            'practice_mode': 'Oefenmodus',
+            'practice_desc': 'Oefen zonder tijdslimiet.',
+            'time_attack_mode': 'Tijdrace',
+            'time_attack_desc': 'Raad zoveel mogelijk noten in 60 seconden.',
+            'sprint_mode': 'Sprint (10 Noten)',
+            'sprint_desc': 'Beantwoord 10 noten zo snel en accuraat mogelijk.',
+            'debug_mode': 'Debug',
+            'debug_desc': 'Toon direct een rapport met voorbeeld fouten.',
+            'show_debug_report': 'Toon Debug Rapport',
+            'quiz_question': 'Welke noot is dit?',
+            'stop': 'Stoppen',
+            'results': 'Resultaten',
+            'score': 'Score',
+            'time': 'Tijd',
+            'points_out_of_total': '{{score}} / {{total}}',
+            'accuracy': 'Nauwkeurigheid',
+            'attention_points': 'Aandachtspunten',
+            'perfect_score': 'Perfect! Je had geen enkele noot fout.',
+            'note_count_incorrect': 'Noot: {{name}} ({{count}} keer fout)',
+            'play_again': 'Opnieuw spelen',
+            'back_to_menu': 'Terug naar menu',
+            'g_clef': 'sol-sleutel',
+            'f_clef': 'fa-sleutel',
+            'both_clefs': 'beide sleutels',
+        },
+        'en': {
+            'choose_mode': 'Choose a mode',
+            'practice_mode': 'Practice Mode',
+            'practice_desc': 'Practice without time limit.',
+            'time_attack_mode': 'Time Attack',
+            'time_attack_desc': 'Guess as many notes as possible in 60 seconds.',
+            'sprint_mode': 'Sprint (10 Notes)',
+            'sprint_desc': 'Answer 10 notes as quickly and accurately as possible.',
+            'debug_mode': 'Debug',
+            'debug_desc': 'Show a report with sample errors directly.',
+            'show_debug_report': 'Show Debug Report',
+            'quiz_question': 'Which note is this?',
+            'stop': 'Stop',
+            'results': 'Results',
+            'score': 'Score',
+            'time': 'Time',
+            'points_out_of_total': '{{score}} / {{total}}',
+            'accuracy': 'Accuracy',
+            'attention_points': 'Problem Notes',
+            'perfect_score': 'Perfect! You got no notes wrong.',
+            'note_count_incorrect': 'Note: {{name}} ({{count}} times wrong)',
+            'play_again': 'Play Again',
+            'back_to_menu': 'Back to Menu',
+            'g_clef': 'g-clef',
+            'f_clef': 'f-clef',
+            'both_clefs': 'both clefs',
+        },
+        'fr': {
+            'choose_mode': 'Choisissez un mode',
+            'practice_mode': 'Mode Entraînement',
+            'practice_desc': 'Entraînez-vous sans limite de temps.',
+            'time_attack_mode': 'Course contre la montre',
+            'time_attack_desc': 'Devinez autant de notes que possible en 60 secondes.',
+            'sprint_mode': 'Sprint (10 Notes)',
+            'sprint_desc': 'Répondez à 10 notes aussi vite et précisément que possible.',
+            'debug_mode': 'Débogage',
+            'debug_desc': 'Afficher directement un rapport avec des erreurs d\'exemple.',
+            'show_debug_report': 'Afficher le rapport de débogage',
+            'quiz_question': 'Quelle est cette note ?',
+            'stop': 'Arrêter',
+            'results': 'Résultats',
+            'score': 'Score',
+            'time': 'Temps',
+            'points_out_of_total': '{{score}} / {{total}}',
+            'accuracy': 'Précision',
+            'attention_points': 'Points d\'attention',
+            'perfect_score': 'Parfait ! Vous n\'avez fait aucune erreur.',
+            'note_count_incorrect': 'Note: {{name}} ({{count}} fois faux)',
+            'play_again': 'Rejouer',
+            'back_to_menu': 'Retour au menu',
+            'g_clef': 'clé de sol',
+            'f_clef': 'clé de fa',
+            'both_clefs': 'les deux clés',
+        },
+        'de': {
+            'choose_mode': 'Wählen Sie einen Modus',
+            'practice_mode': 'Übungsmodus',
+            'practice_desc': 'Üben Sie ohne Zeitlimit.',
+            'time_attack_mode': 'Zeitangriff',
+            'time_attack_desc': 'Erraten Sie so viele Noten wie möglich in 60 Sekunden.',
+            'sprint_mode': 'Sprint (10 Noten)',
+            'sprint_desc': 'Beantworten Sie 10 Noten so schnell und genau wie möglich.',
+            'debug_mode': 'Debug',
+            'debug_desc': 'Zeigen Sie direkt einen Bericht mit Beispielfehlern an.',
+            'show_debug_report': 'Debug-Bericht anzeigen',
+            'quiz_question': 'Welche Note ist das?',
+            'stop': 'Stoppen',
+            'results': 'Ergebnisse',
+            'score': 'Punktzahl',
+            'time': 'Zeit',
+            'points_out_of_total': '{{score}} / {{total}}',
+            'accuracy': 'Genauigkeit',
+            'attention_points': 'Schwerpunkte',
+            'perfect_score': 'Perfekt! Sie haben keine Fehler gemacht.',
+            'note_count_incorrect': 'Note: {{name}} ({{count}} mal falsch)',
+            'play_again': 'Nochmal spielen',
+            'back_to_menu': 'Zurück zum Menü',
+            'g_clef': 'Violinschlüssel',
+            'f_clef': 'Bassschlüssel',
+            'both_clefs': 'beide Schlüssel',
+        },
+        'it': {
+            'choose_mode': 'Scegli una modalità',
+            'practice_mode': 'Modalità Pratica',
+            'practice_desc': 'Esercitati senza limiti di tempo.',
+            'time_attack_mode': 'Attacco a tempo',
+            'time_attack_desc': 'Indovina quante più note possibili in 60 secondi.',
+            'sprint_mode': 'Sprint (10 Note)',
+            'sprint_desc': 'Rispondi a 10 note il più velocemente e accuratamente possibile.',
+            'debug_mode': 'Debug',
+            'debug_desc': 'Mostra direttamente un rapporto con errori di esempio.',
+            'show_debug_report': 'Mostra rapporto di debug',
+            'quiz_question': 'Qual è questa nota?',
+            'stop': 'Ferma',
+            'results': 'Risultati',
+            'score': 'Punteggio',
+            'time': 'Tempo',
+            'points_out_of_total': '{{score}} / {{total}}',
+            'accuracy': 'Precisione',
+            'attention_points': 'Punti di attenzione',
+            'perfect_score': 'Perfetto! Non hai fatto errori.',
+            'note_count_incorrect': 'Nota: {{name}} ({{count}} volte sbagliato)',
+            'play_again': 'Gioca di nuovo',
+            'back_to_menu': 'Torna al menu',
+            'g_clef': 'chiave di violino',
+            'f_clef': 'chiave di basso',
+            'both_clefs': 'entrambe le chiavi',
+        },
+        'es': {
+            'choose_mode': 'Elige un modo',
+            'practice_mode': 'Modo Práctica',
+            'practice_desc': 'Practica sin límite de tiempo.',
+            'time_attack_mode': 'Contrarreloj',
+            'time_attack_desc': 'Adivina tantas notas como puedas en 60 segundos.',
+            'sprint_mode': 'Sprint (10 Notas)',
+            'sprint_desc': 'Responde 10 notas lo más rápido y preciso posible.',
+            'debug_mode': 'Depuración',
+            'debug_desc': 'Mostrar directamente un informe con errores de ejemplo.',
+            'show_debug_report': 'Mostrar informe de depuración',
+            'quiz_question': '¿Qué nota es esta?',
+            'stop': 'Detener',
+            'results': 'Resultados',
+            'score': 'Puntuación',
+            'time': 'Tiempo',
+            'points_out_of_total': '{{score}} / {{total}}',
+            'accuracy': 'Precisión',
+            'attention_points': 'Puntos de atención',
+            'perfect_score': '¡Perfecto! No cometiste ningún error.',
+            'note_count_incorrect': 'Nota: {{name}} ({{count}} veces incorrecto)',
+            'play_again': 'Jugar de nuevo',
+            'back_to_menu': 'Volver al menú',
+            'g_clef': 'clave de sol',
+            'f_clef': 'clave de fa',
+            'both_clefs': 'ambas claves',
+        }
+    };
+
+    let currentLanguage = 'nl'; // Default language
+
+    function translate(key, replacements = {}) {
+        let text = translations[currentLanguage][key] || key; // Fallback to key if not found
+        for (const placeholder in replacements) {
+            text = text.replace(`{{${placeholder}}}`, replacements[placeholder]);
+        }
+        return text;
+    }
+
+    function applyTranslations(uiView) {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.dataset.i18n;
+            element.textContent = translate(key);
+        });
+        // Special handling for buttons with nested spans
+        document.querySelectorAll('button[data-i18n-text]').forEach(button => {
+            const key = button.dataset.i18nText;
+            const span = button.querySelector('span:last-child');
+            if (span) span.textContent = translate(key);
+        });
+        if (uiView) {
+            uiView.updateCurrentLanguageDisplay(currentLanguage);
+        }
+        // Update dynamic text in UI (score, timer, etc.) - will be handled by UIView methods
+    }
+
     //================================================================
     // 1. Data Layer
     //================================================================
@@ -234,6 +428,24 @@ document.addEventListener('DOMContentLoaded', () => {
             this.problemNotesList = document.getElementById('problem-notes');
             this.NOTE_NAMES = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si']; // Lowercase
             this._initAnswerButtons();
+
+            // Language selector
+            this.languageSelector = document.querySelector('.dropdown-content');
+            this.currentLangDisplay = document.getElementById('current-lang-display');
+        }
+
+        bindLanguageSwitcher(handler) {
+            this.languageSelector.addEventListener('click', (event) => {
+                if (event.target.classList.contains('dropdown-item')) {
+                    event.preventDefault(); // Prevent default link behavior
+                    const newLang = event.target.dataset.lang;
+                    handler(newLang);
+                }
+            });
+        }
+
+        updateCurrentLanguageDisplay(lang) {
+            this.currentLangDisplay.textContent = lang.toUpperCase();
         }
 
         bindStartGame(handler) {
@@ -268,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bindAnswer(handler) {
             this.answerButtonsContainer.addEventListener('click', (event) => {
-                if (event.target.tagName === 'BUTTON') {
+                if (event.target.classList.contains('dropdown-item')) {
                     handler(event.target.dataset.noteName);
                 }
             });
@@ -398,6 +610,9 @@ document.addEventListener('DOMContentLoaded', () => {
             this.uiView.bindReportToMenu(this.resetApp.bind(this));
             this.uiView.bindAnswer(this.handleAnswer.bind(this));
             this.uiView.bindDebugReport(this.showDebugReport.bind(this)); // Bind debug button
+            this.uiView.bindLanguageSwitcher(this.setLanguage.bind(this)); // Bind language switcher
+
+            applyTranslations(this.uiView); // Apply initial translations
         }
 
         startGame(mode, clef) {
@@ -504,6 +719,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         _stopTimer() {
             clearInterval(this.timerId);
+        }
+
+        setLanguage(newLang) {
+            currentLanguage = newLang;
+            applyTranslations(this.uiView);
+            this.uiView.updateCurrentLanguageDisplay(newLang);
         }
     }
 
