@@ -496,8 +496,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bindAnswer(handler) {
             this.answerButtonsContainer.addEventListener('click', (event) => {
-                if (event.target.classList.contains('dropdown-item')) {
-                    handler(event.target.dataset.noteName);
+                let targetButton = event.target;
+                if (targetButton.tagName !== 'BUTTON') {
+                    targetButton = event.target.closest('button');
+                }
+                if (targetButton && targetButton.dataset.noteName) {
+                    handler(targetButton.dataset.noteName);
                 }
             });
         }
