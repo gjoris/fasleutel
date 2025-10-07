@@ -86,3 +86,19 @@ body {
 .hidden {
     display: none !important;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    #staff-container svg {
+        width: 95vw; /* Make it take up more width on very small screens */
+    }
+    .buttons.is-centered {
+        flex-wrap: wrap;
+    }
+    .buttons.is-centered .button {
+        margin-bottom: 0.5rem; /* Add some space between wrapped buttons */
+    }
+}
