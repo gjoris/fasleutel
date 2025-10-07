@@ -180,6 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'made_with_love': 'Hecho con ❤️ para 🎵.',
             'github_link_prefix': 'Ver código en',
             'github_text': 'GitHub',
+        }
+    }
 
     let currentLanguage = 'nl'; // Default language
 
