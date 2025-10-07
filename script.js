@@ -360,11 +360,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderMini(note, targetSvgElement) {
             targetSvgElement.innerHTML = '';
-            const miniWidth = 150; // Fixed width for the mini staff SVG
-            const miniHeight = 100; // Fixed height for the mini staff SVG
+            const miniWidth = 150; // Fixed width for the mini staff SVG (used for viewBox)
+            const miniHeight = 100; // Fixed height for the mini staff SVG (used for viewBox)
 
-            targetSvgElement.setAttribute('width', miniWidth);
-            targetSvgElement.setAttribute('height', miniHeight);
+            // targetSvgElement.setAttribute('width', miniWidth); // Removed to allow CSS control
+            // targetSvgElement.setAttribute('height', miniHeight); // Removed to allow CSS control
             targetSvgElement.setAttribute('viewBox', `0 0 ${miniWidth} ${miniHeight}`); // 1:1 scaling
 
             // Use smaller internal drawing units for the mini staff
