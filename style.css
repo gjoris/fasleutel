@@ -1,0 +1,111 @@
+/* Algemene styling */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#app-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+h1, h2 {
+    color: #1c1e21;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Knoppen */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #e4e6eb;
+    color: #050505;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #d8dbdf;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#start-g-clef, #start-f-clef, #start-both-clefs {
+    background-color: #1877f2;
+    color: white;
+    font-weight: bold;
+}
+
+#start-g-clef:hover, #start-f-clef:hover, #start-both-clefs:hover {
+    background-color: #166fe5;
+}
+
+/* Quiz Scherm */
+#quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#score {
+    font-size: 1.1rem;
+    font-weight: 500;
+    background-color: #e7f3ff;
+    color: #1877f2;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+#back-to-menu {
+    background: none;
+    font-size: 1rem;
+    padding: 8px;
+}
+
+#staff-container {
+    margin: 1.5rem 0;
+}
+
+/* Feedback op antwoorden */
+#answer-buttons button.correct {
+    background-color: #42b72a; /* Groen */
+    color: white;
+    transform: scale(1.05);
+}
+
+#answer-buttons button.incorrect {
+    background-color: #fa383e; /* Rood */
+    color: white;
+}
+
+#answer-buttons button.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}

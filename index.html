@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muzieknoten Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Scherm 1: Sleutelkeuze -->
+        <div id="menu-screen">
+            <h1>Kies een sleutel om te oefenen</h1>
+            <div class="button-group">
+                <button id="start-g-clef">Sol-sleutel</button>
+                <button id="start-f-clef">Fa-sleutel</button>
+                <button id="start-both-clefs">Beide sleutels</button>
+            </div>
+        </div>
+
+        <!-- Scherm 2: Quiz -->
+        <div id="quiz-screen" class="hidden">
+            <div id="quiz-header">
+                <div id="score">Score: 0/0</div>
+                <button id="back-to-menu">← Terug</button>
+            </div>
+            <div id="staff-container">
+                <svg id="staff" width="400" height="200"></svg>
+            </div>
+            <h2>Welke noot is dit?</h2>
+            <div id="answer-buttons" class="button-group">
+                <!-- Knoppen worden door JS gegenereerd -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
