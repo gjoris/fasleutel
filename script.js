@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const y = this.STAFF_BASE_Y + i * this.STAFF_LINE_GAP;
                 const line = this._createElementNS('line', {
                     x1: '10', y1: y, x2: '390', y2: y,
-                    stroke: '#CBD5E0', 'stroke-width': '1'
+                    stroke: '#000000', 'stroke-width': '1'
                 });
                 this.svg.appendChild(line);
             }
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const clefSize = note.clef === 'g' ? '70px' : '48px';
 
             const clefText = this._createElementNS('text', {
-                x: '20', y: clefY, fill: '#CBD5E0', 'font-size': clefSize
+                x: '20', y: clefY, fill: '#000000', 'font-size': clefSize
             });
             clefText.textContent = clefChar;
             this.svg.appendChild(clefText);
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         _drawNote(note) {
             const noteY = this.STAFF_BASE_Y + (this.STAFF_LINE_GAP * 2) + (note.y * this.STAFF_LINE_GAP);
             const noteHead = this._createElementNS('ellipse', {
-                cx: '200', cy: noteY, rx: '8', ry: '6', fill: '#CBD5E0'
+                cx: '200', cy: noteY, rx: '8', ry: '6', fill: '#000000'
             });
             this.svg.appendChild(noteHead);
         }
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const ledgerLineY = this.STAFF_BASE_Y + (this.STAFF_LINE_GAP * 2) + (y_pos * this.STAFF_LINE_GAP);
                 const ledgerLine = this._createElementNS('line', {
                     x1: '190', y1: ledgerLineY, x2: '210', y2: ledgerLineY,
-                    stroke: '#CBD5E0', 'stroke-width': '1.5'
+                    stroke: '#000000', 'stroke-width': '1.5'
                 });
                 this.svg.appendChild(ledgerLine);
             };
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return el;
         }
 
-        renderMini(note, targetSvgElement, scale = 0.5) {
+        renderMini(note, targetSvgElement, scale = 0.8) {
             targetSvgElement.innerHTML = '';
             const originalWidth = 400;
             const originalHeight = 200;
@@ -160,17 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const scaledLineGap = this.STAFF_LINE_GAP * scale;
             const scaledBaseY = this.STAFF_BASE_Y * scale;
             const scaledNoteX = 200 * scale;
-            const scaledClefX = 20 * scale;
+            const scaledClefX = (scaledNoteX - 60 * scale); // Clef closer to note
             const scaledNoteRx = 8 * scale;
             const scaledNoteRy = 6 * scale;
-            const scaledClefFontSize = (note.clef === 'g' ? 70 : 48) * scale; // Use original sizes, then scale
+            const scaledClefFontSize = (note.clef === 'g' ? 70 : 48) * scale;
 
             // Draw 5 staff lines
             for (let i = 0; i < this.STAFF_LINES; i++) {
                 const y = scaledBaseY + i * scaledLineGap;
                 const line = this._createElementNS('line', {
-                    x1: 10 * scale, y1: y, x2: (originalWidth - 10) * scale, y2: y,
-                    stroke: '#CBD5E0', 'stroke-width': 1 * scale
+                    x1: (scaledNoteX - 30 * scale), y1: y, x2: (scaledNoteX + 30 * scale), y2: y, // Shorter lines
+                    stroke: '#000000', 'stroke-width': 1 * scale
                 });
                 targetSvgElement.appendChild(line);
             }
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 : scaledBaseY + 2.9 * scaledLineGap;
 
             const clefText = this._createElementNS('text', {
-                x: scaledClefX, y: clefY, fill: '#CBD5E0', 'font-size': `${scaledClefFontSize}px`
+                x: scaledClefX, y: clefY, fill: '#000000', 'font-size': `${scaledClefFontSize}px`
             });
             clefText.textContent = clefChar;
             targetSvgElement.appendChild(clefText);
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Draw note
             const noteY = scaledBaseY + (scaledLineGap * 2) + (note.y * scaledLineGap);
             const noteHead = this._createElementNS('ellipse', {
-                cx: scaledNoteX, cy: noteY, rx: scaledNoteRx, ry: scaledNoteRy, fill: '#CBD5E0'
+                cx: scaledNoteX, cy: noteY, rx: scaledNoteRx, ry: scaledNoteRy, fill: '#000000'
             });
             targetSvgElement.appendChild(noteHead);
 
@@ -198,8 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const drawLine = (y_pos) => {
                 const ledgerLineY = scaledBaseY + (scaledLineGap * 2) + (y_pos * scaledLineGap);
                 const ledgerLine = this._createElementNS('line', {
-                    x1: (scaledNoteX - 10 * scale), y1: ledgerLineY, x2: (scaledNoteX + 10 * scale), y2: ledgerLineY,
-                    stroke: '#CBD5E0', 'stroke-width': 1.5 * scale
+                    x1: (scaledNoteX - 15 * scale), y1: ledgerLineY, x2: (scaledNoteX + 15 * scale), y2: ledgerLineY, // Shorter ledger lines
+                    stroke: '#000000', 'stroke-width': 1.5 * scale
                 });
                 targetSvgElement.appendChild(ledgerLine);
             };
@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+    }
 
     /**
      * Beheert alle overige DOM-interacties.
@@ -329,6 +330,12 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleAnswerButtons(disabled) {
             this.answerButtonsContainer.querySelectorAll('button').forEach(btn => {
                 btn.classList.toggle('disabled', disabled);
+            });
+        }
+
+        resetAnswerButtons() {
+            this.answerButtonsContainer.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
             });
         }
 
