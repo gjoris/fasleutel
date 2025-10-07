@@ -67,12 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    // --- SVG Paden voor Sleutels ---
-    const clefPaths = {
-        g: 'M11.7-26.9c-0.9-2.5-2.2-4.8-3.8-6.9c-2.3-2.9-5.1-5.2-8.2-6.7c-5-2.5-10.9-2.7-16.3-0.4c-5.4,2.3-9.5,7-11.4,12.6c-1.2,3.4-1.5,7-1,10.5c0.5,3.5,1.8,6.9,3.8,9.9c1.3,2,2.9,3.8,4.7,5.4c3.6,3,7.9,5,12.5,5.5c5.1,0.5,10.1-0.5,14.7-3c2.3-1.2,4.4-2.9,6.2-4.9c2.4-2.7,4-6,4.8-9.5c0.8-3.5,0.7-7.1-0.1-10.6c-1-4.2-3-8-5.8-11.3c-0.2-0.2-0.4-0.4-0.6-0.6c-0.7-0.7-1.5-0.8-2.2-0.1c-0.7,0.7-0.8,1.5-0.1,2.2c0.1,0.1,0.2,0.2,0.3,0.3c2.4,2.9,4.2,6.2,5,9.8c0.7,3,0.8,6.1,0.1,9.1c-0.7,2.9-2.1,5.6-4.1,7.8c-1.6,1.8-3.5,3.2-5.6,4.3c-4,2.1-8.5,3-12.9,2.5c-4-0.4-7.8-2.2-10.9-4.7c-1.6-1.3-3-2.9-4.1-4.6c-1.8-2.7-2.9-5.7-3.4-8.8c-0.5-3.1-0.2-6.2,0.8-9.2c1.7-5,5.3-9,9.9-11c4.8-2.1,10-1.9,14.4,0.3c2.8,1.4,5.2,3.4,7.2,5.9c1.5,1.9,2.7,4,3.5,6.2c0.5,1.5,0.9,3,1.2,4.5c0.1,0.8,0.9,1.3,1.7,1.2c0.8-0.1,1.3-0.9,1.2-1.7C12.6-24.1,12.2-25.5,11.7-26.9z M-11.9,22.4c-2.6,0-5.2-0.8-7.4-2.3c-2.3-1.5-4-3.6-5-6.1c-1-2.5-1.3-5.2-0.8-7.8c0.4-2.6,1.6-5,3.4-7.1c0.6-0.7,1.5-0.8,2.2-0.2c0.7,0.6,0.8,1.5,0.2,2.2c-1.5,1.8-2.5,3.8-2.9,6c-0.4,2.2-0.1,4.5,0.7,6.6c0.8,2.1,2.2,3.9,4.1,5.1c1.9,1.2,4.1,1.8,6.4,1.8c0.8,0,1.5,0.7,1.5,1.5C-10.4,21.7-11.1,22.4-11.9,22.4z',
-        f: 'M-28.8-6.3c-2.9-1.2-5.3-3.2-6.9-5.8c-1.6-2.6-2.4-5.6-2.2-8.6c0.2-3,1.3-5.9,3.2-8.3c1.9-2.4,4.6-4.2,7.6-5.1c3-1,6.2-1,9.2,0.1c0.8,0.3,1.2,1.2,0.9,2c-0.3,0.8-1.2,1.2-2,0.9c-2.5-0.9-5.1-0.9-7.6-0.1c-2.5,0.8-4.7,2.3-6.3,4.3c-1.6,2-2.5,4.4-2.7,7c-0.2,2.6,0.5,5.2,1.9,7.4c1.4,2.2,3.5,3.9,6,4.9c0.8,0.3,1.2,1.2,0.9,2C-28, -6, -28.4, -6.2, -28.8, -6.3z M-23.2,1.2c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S-22.1,1.2-23.2,1.2z M-23.2-15.8c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S-22.1-15.8-23.2-15.8z'
-    };
-
     // --- Functies ---
 
     function init() {
@@ -139,17 +133,21 @@ document.addEventListener('DOMContentLoaded', () => {
             staffSvg.appendChild(line);
         }
 
-        // Teken de sleutel
-        const clef = document.createElementNS(SVG_NAMESPACE, 'path');
-        clef.setAttribute('d', clefPaths[note.clef]);
-        const clefTransform = note.clef === 'g' 
-            ? 'translate(40, 135) scale(1.8)' 
-            : 'translate(40, 112) scale(1.8)';
-        clef.setAttribute('transform', clefTransform);
-        staffSvg.appendChild(clef);
+        // Teken de sleutel als tekst
+        const clefChar = note.clef === 'g' ? '𝄞' : '𝄢';
+        const clefText = document.createElementNS(SVG_NAMESPACE, 'text');
+        clefText.setAttribute('x', '20');
+        const clefY = note.clef === 'g' ? STAFF_BASE_Y + 3.8 * STAFF_LINE_GAP : STAFF_BASE_Y + 2.9 * STAFF_LINE_GAP;
+        clefText.setAttribute('y', clefY);
+        const clefSize = note.clef === 'g' ? '70px' : '48px';
+        clefText.setAttribute('font-size', clefSize);
+        clefText.setAttribute('fill', 'black');
+        clefText.textContent = clefChar;
+        staffSvg.appendChild(clefText);
+
 
         // Teken de noot
-        const noteY = STAFF_BASE_Y + (STAFF_LINE_GAP * 2) + (note.y * STAFF_LINE_GAP / 2);
+        const noteY = STAFF_BASE_Y + (STAFF_LINE_GAP * 2) + (note.y * STAFF_LINE_GAP);
         const noteHead = document.createElementNS(SVG_NAMESPACE, 'ellipse');
         noteHead.setAttribute('cx', '200');
         noteHead.setAttribute('cy', noteY);
@@ -158,15 +156,27 @@ document.addEventListener('DOMContentLoaded', () => {
         noteHead.setAttribute('fill', 'black');
         staffSvg.appendChild(noteHead);
 
-        // Teken hulplijnen indien nodig
-        if (note.y <= -3 || note.y >= 3) {
-            const ledgerY = Math.round(note.y) % 2 === 0 ? noteY : noteY + STAFF_LINE_GAP/2;
-             if (note.y === 3 || note.y === -3) { // C noten
+        // Teken hulplijnen (ledger lines) indien nodig
+        if (note.y >= 3) { // Noten onder de notenbalk
+            for (let y_pos = 3; y_pos <= note.y; y_pos += 1) {
+                const ledgerLineY = STAFF_BASE_Y + (STAFF_LINE_GAP * 2) + (y_pos * STAFF_LINE_GAP);
                 const ledgerLine = document.createElementNS(SVG_NAMESPACE, 'line');
                 ledgerLine.setAttribute('x1', '190');
-                ledgerLine.setAttribute('y1', noteY);
+                ledgerLine.setAttribute('y1', ledgerLineY);
                 ledgerLine.setAttribute('x2', '210');
-                ledgerLine.setAttribute('y2', noteY);
+                ledgerLine.setAttribute('y2', ledgerLineY);
+                ledgerLine.setAttribute('stroke', 'black');
+                ledgerLine.setAttribute('stroke-width', '1.5');
+                staffSvg.appendChild(ledgerLine);
+            }
+        } else if (note.y <= -3) { // Noten boven de notenbalk
+            for (let y_pos = -3; y_pos >= note.y; y_pos -= 1) {
+                const ledgerLineY = STAFF_BASE_Y + (STAFF_LINE_GAP * 2) + (y_pos * STAFF_LINE_GAP);
+                const ledgerLine = document.createElementNS(SVG_NAMESPACE, 'line');
+                ledgerLine.setAttribute('x1', '190');
+                ledgerLine.setAttribute('y1', ledgerLineY);
+                ledgerLine.setAttribute('x2', '210');
+                ledgerLine.setAttribute('y2', ledgerLineY);
                 ledgerLine.setAttribute('stroke', 'black');
                 ledgerLine.setAttribute('stroke-width', '1.5');
                 staffSvg.appendChild(ledgerLine);
