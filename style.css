@@ -29,7 +29,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    overflow: hidden;
+    /* Removed overflow: hidden; to allow page scrolling */
 }
 
 #app-container {
@@ -194,8 +194,6 @@ button:active {
     padding: 0;
     margin-bottom: 2.5rem;
     text-align: left;
-    max-height: 200px; /* Enable scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 #problem-notes li {
@@ -211,8 +209,8 @@ button:active {
 }
 
 .problem-note-item .mini-staff {
-    width: 120px; /* Enlarged mini staff */
-    height: 60px; /* Enlarged mini staff */
+    width: 150px; /* Further enlarged mini staff */
+    height: 100px; /* Further enlarged mini staff */
     flex-shrink: 0;
     background-color: var(--md-background);
     border-radius: 4px;
