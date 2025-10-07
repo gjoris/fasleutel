@@ -1,70 +1,71 @@
 :root {
-    --background: #1A202C;
-    --container-bg: #2D3748;
-    --primary-text: #E2E8F0;
-    --secondary-text: #A0AEC0;
-    --accent-color: #805AD5;
-    --accent-color-hover: #6B46C1;
-    --correct-bg: #2F855A;
-    --incorrect-bg: #C53030;
-    --button-bg: #4A5568;
-    --button-hover-bg: #2D3748;
+    /* Material Design Light Theme Colors */
+    --md-primary: #6200EE; /* Deep purple for primary elements */
+    --md-primary-variant: #3700B3; /* Darker purple */
+    --md-secondary: #03DAC6; /* Teal for secondary elements */
+    --md-background: #F5F5F5; /* Light grey background */
+    --md-surface: #FFFFFF; /* White surface for cards/containers */
+    --md-error: #B00020; /* Red for errors */
+    --md-on-primary: #FFFFFF; /* Text on primary */
+    --md-on-secondary: #000000; /* Text on secondary */
+    --md-on-background: #000000; /* Text on background */
+    --md-on-surface: #000000; /* Text on surface */
+    --md-on-error: #FFFFFF; /* Text on error */
+    --md-text-high-emphasis: rgba(0, 0, 0, 0.87); /* Main text color */
+    --md-text-medium-emphasis: rgba(0, 0, 0, 0.60); /* Secondary text color */
+    --md-text-disabled: rgba(0, 0, 0, 0.38); /* Disabled text color */
+
+    /* Custom additions for specific elements */
+    --correct-bg: #4CAF50; /* Material Green */
+    --incorrect-bg: #F44336; /* Material Red */
 }
 
 body {
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: linear-gradient(45deg, var(--background) 0%, #2C3E50 100%);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
-    color: var(--primary-text);
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--md-background);
+    color: var(--md-text-high-emphasis);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    overflow: hidden; /* Prevent scrollbars from animation */
-}
-
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    overflow: hidden;
 }
 
 #app-container {
-    background-color: var(--container-bg);
+    background-color: var(--md-surface);
     padding: 2.5rem 3rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05); /* Enhanced shadow and subtle border */
+    border-radius: 8px; /* Material standard radius */
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 
+                0px 4px 5px 0px rgba(0,0,0,0.14), 
+                0px 1px 10px 0px rgba(0,0,0,0.12); /* Material elevation shadow */
     text-align: center;
     width: 90%;
     max-width: 550px;
-    border: none; /* Remove previous border */
-    position: relative; /* For potential future layering */
+    position: relative;
     z-index: 1;
-    backdrop-filter: blur(5px); /* Glassmorphism effect */
-    -webkit-backdrop-filter: blur(5px); /* Safari support */
-    background-color: rgba(45, 55, 72, 0.8); /* Slightly transparent background */
 }
 
 h1, h2 {
-    color: var(--primary-text);
-    font-weight: 700;
+    color: var(--md-on-surface);
+    font-weight: 500; /* Roboto medium weight */
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
 }
 
 h2 {
-    font-size: 1.25rem;
-    color: var(--secondary-text);
+    font-size: 1.4rem;
+    color: var(--md-text-high-emphasis);
     margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 p {
-    color: var(--secondary-text);
-    margin-bottom: 1rem;
+    color: var(--md-text-medium-emphasis);
+    margin-bottom: 1.5rem;
 }
 
 .hidden {
@@ -76,39 +77,60 @@ p {
     flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 button {
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 1rem;
     font-weight: 500;
     border: none;
-    border-radius: 8px;
-    background-color: var(--button-bg);
-    color: var(--primary-text);
+    border-radius: 4px; /* Material standard radius */
+    background-color: var(--md-primary);
+    color: var(--md-on-primary);
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14), 
+                0px 3px 1px -2px rgba(0,0,0,0.2), 
+                0px 1px 5px 0px rgba(0,0,0,0.12); /* Material button shadow */
 }
 
 button:hover {
-    background-color: var(--button-hover-bg);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--md-primary-variant);
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.14), 
+                0px 1px 10px 0px rgba(0,0,0,0.12), 
+                0px 2px 4px -1px rgba(0,0,0,0.2); /* Elevated shadow on hover */
+    transform: translateY(-1px); /* Subtle lift */
 }
 
 button:active {
     transform: translateY(0);
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14), 
+                0px 3px 1px -2px rgba(0,0,0,0.2), 
+                0px 1px 5px 0px rgba(0,0,0,0.12); /* Reset shadow on active */
 }
 
-[data-mode="practice"],
-[data-mode="time-attack"] {
-    background-color: var(--accent-color);
+/* Specific button styles */
+#back-to-menu, #report-to-menu {
+    background: none;
+    color: var(--md-primary);
+    box-shadow: none;
+    padding: 8px 16px;
 }
 
-[data-mode="practice"]:hover,
-[data-mode="time-attack"]:hover {
-    background-color: var(--accent-color-hover);
+#back-to-menu:hover, #report-to-menu:hover {
+    background-color: rgba(var(--md-primary), 0.08); /* Subtle ripple effect */
+    box-shadow: none;
+    transform: translateY(0);
+}
+
+#restart-game {
+    background-color: var(--md-secondary);
+    color: var(--md-on-secondary);
+}
+
+#restart-game:hover {
+    background-color: #00BFA5; /* Slightly darker teal */
 }
 
 #quiz-header {
@@ -121,41 +143,42 @@ button:active {
 #score, #timer {
     font-size: 1.1rem;
     font-weight: 500;
-    background-color: var(--background);
+    background-color: var(--md-surface);
+    color: var(--md-primary);
     padding: 8px 16px;
-    border-radius: 8px;
-}
-
-#back-to-menu {
-    background: none;
-    font-size: 1rem;
-    padding: 8px;
-    box-shadow: none;
+    border-radius: 4px;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14); /* Subtle shadow */
 }
 
 #staff-container {
     margin: 2rem 0;
-    background-color: var(--background);
-    border-radius: 8px;
+    background-color: var(--md-surface);
+    border-radius: 4px;
     padding: 1rem;
+    box-shadow: inset 0px 0px 5px rgba(0,0,0,0.05); /* Inner shadow for depth */
 }
 
+/* Feedback on answers */
 #answer-buttons button.correct {
     background-color: var(--correct-bg);
-    color: white;
+    color: var(--md-on-primary);
     transform: scale(1.05);
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.14); 
 }
 
 #answer-buttons button.incorrect {
     background-color: var(--incorrect-bg);
-    color: white;
+    color: var(--md-on-primary);
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.14); 
 }
 
 #answer-buttons button.disabled {
     pointer-events: none;
     opacity: 0.5;
+    box-shadow: none;
 }
 
+/* Report Screen */
 #report-screen h1 {
     margin-bottom: 1rem;
 }
@@ -163,6 +186,7 @@ button:active {
 #report-summary {
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    font-weight: 500;
 }
 
 #problem-notes {
@@ -170,38 +194,39 @@ button:active {
     padding: 0;
     margin-bottom: 2.5rem;
     text-align: left;
+    max-height: 200px; /* Enable scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 #problem-notes li {
-    background-color: var(--background);
+    background-color: var(--md-surface);
     padding: 12px 15px;
-    border-radius: 6px;
+    border-radius: 4px;
     margin-bottom: 10px;
     font-size: 1.1rem;
-}
-
-#menu-screen hr {
-    border: none;
-    border-top: 1px solid var(--button-bg);
-    margin: 2.5rem 0;
-}
-
-/* Styles for Visual Report */
-.problem-note-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* Increased gap */
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.1); /* Subtle shadow for list items */
 }
 
 .problem-note-item .mini-staff {
-    width: 80px; /* Adjust as needed */
-    height: 40px; /* Adjust as needed */
+    width: 120px; /* Enlarged mini staff */
+    height: 60px; /* Enlarged mini staff */
     flex-shrink: 0;
-    background-color: var(--background);
+    background-color: var(--md-background);
     border-radius: 4px;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.1); /* Inner shadow */
 }
 
 .problem-note-item span {
     flex-grow: 1;
     text-align: left;
+    color: var(--md-text-high-emphasis);
+}
+
+#menu-screen hr {
+    border: none;
+    border-top: 1px solid var(--md-surface);
+    margin: 2.5rem 0;
 }
