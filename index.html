@@ -8,13 +8,26 @@
 </head>
 <body>
     <div id="app-container">
-        <!-- Scherm 1: Sleutelkeuze -->
+        <!-- Scherm 1: Hoofdmenu -->
         <div id="menu-screen">
-            <h1>Kies een sleutel om te oefenen</h1>
+            <h1>Kies een modus</h1>
+            
+            <h2>Oefenmodus</h2>
+            <p>Oefen zonder tijdslimiet.</p>
             <div class="button-group">
-                <button id="start-g-clef">Sol-sleutel</button>
-                <button id="start-f-clef">Fa-sleutel</button>
-                <button id="start-both-clefs">Beide sleutels</button>
+                <button data-mode="practice" data-clef="g">Sol-sleutel</button>
+                <button data-mode="practice" data-clef="f">Fa-sleutel</button>
+                <button data-mode="practice" data-clef="both">Beide sleutels</button>
+            </div>
+
+            <hr>
+
+            <h2>Tijdrace</h2>
+            <p>Raad zoveel mogelijk noten in 60 seconden.</p>
+            <div class="button-group">
+                <button data-mode="time-attack" data-clef="g">Start (Sol-sleutel)</button>
+                <button data-mode="time-attack" data-clef="f">Start (Fa-sleutel)</button>
+                <button data-mode="time-attack" data-clef="both">Start (Beide)</button>
             </div>
         </div>
 
@@ -22,7 +35,8 @@
         <div id="quiz-screen" class="hidden">
             <div id="quiz-header">
                 <div id="score">Score: 0/0</div>
-                <button id="back-to-menu">← Terug</button>
+                <div id="timer" class="hidden">Tijd: 60</div>
+                <button id="back-to-menu">← Stoppen</button>
             </div>
             <div id="staff-container">
                 <svg id="staff" width="400" height="200"></svg>
@@ -32,8 +46,24 @@
                 <!-- Knoppen worden door JS gegenereerd -->
             </div>
         </div>
+
+        <!-- Scherm 3: Rapport -->
+        <div id="report-screen" class="hidden">
+            <h1>Resultaten</h1>
+            <div id="report-summary">
+                <!-- Score wordt door JS ingevuld -->
+            </div>
+            <h2>Aandachtspunten</h2>
+            <ul id="problem-notes">
+                <!-- Probleemnoten worden door JS ingevuld -->
+            </ul>
+            <div class="button-group">
+                <button id="restart-game">Opnieuw spelen</button>
+                <button id="report-to-menu">Terug naar menu</button>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
