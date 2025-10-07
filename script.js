@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'sol-sleutel',
             'f_clef': 'fa-sleutel',
             'both_clefs': 'beide sleutels',
+            'made_with_love': 'Gemaakt met ❤️.',
+            'github_link_text': 'Bekijk de code op GitHub.',
         },
         'en': {
             'choose_mode': 'Choose a mode',
@@ -54,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'g-clef',
             'f_clef': 'f-clef',
             'both_clefs': 'both clefs',
+            'made_with_love': 'Made with ❤️.',
+            'github_link_text': 'View code on GitHub.',
         },
         'fr': {
             'choose_mode': 'Choisissez un mode',
@@ -81,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'clé de sol',
             'f_clef': 'clé de fa',
             'both_clefs': 'les deux clés',
+            'made_with_love': 'Fait avec ❤️.',
+            'github_link_text': 'Voir le code sur GitHub.',
         },
         'de': {
             'choose_mode': 'Wählen Sie einen Modus',
@@ -108,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'Violinschlüssel',
             'f_clef': 'Bassschlüssel',
             'both_clefs': 'beide Schlüssel',
+            'made_with_love': 'Mit ❤️ gemacht.',
+            'github_link_text': 'Code auf GitHub ansehen.',
         },
         'it': {
             'choose_mode': 'Scegli una modalità',
@@ -135,6 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'chiave di violino',
             'f_clef': 'chiave di basso',
             'both_clefs': 'entrambe le chiavi',
+            'made_with_love': 'Fatto con ❤️.',
+            'github_link_text': 'Vedi il codice su GitHub.',
         },
         'es': {
             'choose_mode': 'Elige un modo',
@@ -162,6 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'clave de sol',
             'f_clef': 'clave de fa',
             'both_clefs': 'ambas claves',
+            'made_with_love': 'Hecho con ❤️.',
+            'github_link_text': 'Ver código en GitHub.',
         }
     };
 
