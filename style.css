@@ -1,230 +1,75 @@
-:root {
-    /* Material Design Light Theme Colors */
-    --md-primary: #6200EE; /* Deep purple for primary elements */
-    --md-primary-variant: #3700B3; /* Darker purple */
-    --md-secondary: #03DAC6; /* Teal for secondary elements */
-    --md-background: #F5F5F5; /* Light grey background */
-    --md-surface: #FFFFFF; /* White surface for cards/containers */
-    --md-error: #B00020; /* Red for errors */
-    --md-on-primary: #FFFFFF; /* Text on primary */
-    --md-on-secondary: #000000; /* Text on secondary */
-    --md-on-background: #000000; /* Text on background */
-    --md-on-surface: #000000; /* Text on surface */
-    --md-on-error: #FFFFFF; /* Text on error */
-    --md-text-high-emphasis: rgba(0, 0, 0, 0.87); /* Main text color */
-    --md-text-medium-emphasis: rgba(0, 0, 0, 0.60); /* Secondary text color */
-    --md-text-disabled: rgba(0, 0, 0, 0.38); /* Disabled text color */
+/* Custom styles for Bulma integration */
 
-    /* Custom additions for specific elements */
-    --correct-bg: #4CAF50; /* Material Green */
-    --incorrect-bg: #F44336; /* Material Red */
+html, body {
+    height: 100%;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--md-background);
-    color: var(--md-text-high-emphasis);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    /* Removed overflow: hidden; to allow page scrolling */
+    /* Let Bulma handle most styling */
+    font-family: 'Roboto', sans-serif; /* Keep Roboto as it's Material/Bulma friendly */
 }
 
-#app-container {
-    background-color: var(--md-surface);
-    padding: 2.5rem 3rem;
-    border-radius: 8px; /* Material standard radius */
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 
-                0px 4px 5px 0px rgba(0,0,0,0.14), 
-                0px 1px 10px 0px rgba(0,0,0,0.12); /* Material elevation shadow */
-    text-align: center;
-    width: 90%;
-    max-width: 550px;
-    position: relative;
-    z-index: 1;
-}
-
-h1, h2 {
-    color: var(--md-on-surface);
-    font-weight: 500; /* Roboto medium weight */
-}
-
-h1 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-}
-
-h2 {
-    font-size: 1.4rem;
-    color: var(--md-text-high-emphasis);
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-p {
-    color: var(--md-text-medium-emphasis);
-    margin-bottom: 1.5rem;
-}
-
-.hidden {
-    display: none;
-}
-
-.button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 1.5rem;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 4px; /* Material standard radius */
-    background-color: var(--md-primary);
-    color: var(--md-on-primary);
-    cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
-    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14), 
-                0px 3px 1px -2px rgba(0,0,0,0.2), 
-                0px 1px 5px 0px rgba(0,0,0,0.12); /* Material button shadow */
-}
-
-button:hover {
-    background-color: var(--md-primary-variant);
-    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.14), 
-                0px 1px 10px 0px rgba(0,0,0,0.12), 
-                0px 2px 4px -1px rgba(0,0,0,0.2); /* Elevated shadow on hover */
-    transform: translateY(-1px); /* Subtle lift */
-}
-
-button:active {
-    transform: translateY(0);
-    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14), 
-                0px 3px 1px -2px rgba(0,0,0,0.2), 
-                0px 1px 5px 0px rgba(0,0,0,0.12); /* Reset shadow on active */
-}
-
-/* Specific button styles */
-#back-to-menu, #report-to-menu {
-    background: none;
-    color: var(--md-primary);
-    box-shadow: none;
-    padding: 8px 16px;
-}
-
-#back-to-menu:hover, #report-to-menu:hover {
-    background-color: rgba(var(--md-primary), 0.08); /* Subtle ripple effect */
-    box-shadow: none;
-    transform: translateY(0);
-}
-
-#restart-game {
-    background-color: var(--md-secondary);
-    color: var(--md-on-secondary);
-}
-
-#restart-game:hover {
-    background-color: #00BFA5; /* Slightly darker teal */
-}
-
-#quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-#score, #timer {
-    font-size: 1.1rem;
-    font-weight: 500;
-    background-color: var(--md-surface);
-    color: var(--md-primary);
-    padding: 8px 16px;
-    border-radius: 4px;
-    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.14); /* Subtle shadow */
-}
-
+/* Only custom elements not covered by Bulma */
 #staff-container {
-    margin: 2rem 0;
-    background-color: var(--md-surface);
+    background-color: #fff; /* White background for staff */
+    border: 1px solid #dbdbdb;
     border-radius: 4px;
     padding: 1rem;
-    box-shadow: inset 0px 0px 5px rgba(0,0,0,0.05); /* Inner shadow for depth */
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    display: flex; /* Make it a flex container */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
-/* Feedback on answers */
-#answer-buttons button.correct {
-    background-color: var(--correct-bg);
-    color: var(--md-on-primary);
-    transform: scale(1.05);
-    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.14); 
+#staff-container svg {
+    /* No need for display: block; margin: 0 auto; anymore, flexbox handles it */
 }
 
-#answer-buttons button.incorrect {
-    background-color: var(--incorrect-bg);
-    color: var(--md-on-primary);
-    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.14); 
-}
-
-#answer-buttons button.disabled {
-    pointer-events: none;
-    opacity: 0.5;
+/* Report Screen specific styles */
+#problem-notes.box {
+    /* Removed max-height and overflow-y to allow full list display */
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
     box-shadow: none;
+    padding: 1rem;
 }
 
-/* Report Screen */
-#report-screen h1 {
-    margin-bottom: 1rem;
-}
-
-#report-summary {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    font-weight: 500;
-}
-
-#problem-notes {
-    list-style-type: none;
+#problem-notes ul {
+    list-style: none;
+    margin: 0;
     padding: 0;
-    margin-bottom: 2.5rem;
-    text-align: left;
 }
 
 #problem-notes li {
-    background-color: var(--md-surface);
-    padding: 12px 15px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
     display: flex;
     align-items: center;
-    gap: 15px; /* Increased gap */
-    box-shadow: 0px 1px 3px rgba(0,0,0,0.1); /* Subtle shadow for list items */
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #ededed;
+}
+
+#problem-notes li:last-child {
+    border-bottom: none;
 }
 
 .problem-note-item .mini-staff {
     width: 150px; /* Further enlarged mini staff */
     height: 100px; /* Further enlarged mini staff */
     flex-shrink: 0;
-    background-color: var(--md-background);
+    background-color: #fcfcfc; /* Slightly different background for mini staff */
+    border: 1px solid #ededed;
     border-radius: 4px;
-    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.1); /* Inner shadow */
+    margin-right: 1rem;
 }
 
 .problem-note-item span {
     flex-grow: 1;
     text-align: left;
-    color: var(--md-text-high-emphasis);
+    color: #363636; /* Bulma default text color */
 }
 
-#menu-screen hr {
-    border: none;
-    border-top: 1px solid var(--md-surface);
-    margin: 2.5rem 0;
+/* Hidden class (from previous themes, keep for JS toggle) */
+.hidden {
+    display: none !important;
 }

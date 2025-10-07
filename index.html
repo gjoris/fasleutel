@@ -4,85 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muzieknoten Quiz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Material Icons (voor extra iconen) -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app-container">
-        <!-- Scherm 1: Hoofdmenu -->
-        <div id="menu-screen">
-            <h1>Kies een modus</h1>
-            
-            <h2>Oefenmodus</h2>
-            <p>Oefen zonder tijdslimiet.</p>
-            <div class="button-group">
-                <button data-mode="practice" data-clef="g">Sol-sleutel</button>
-                <button data-mode="practice" data-clef="f">Fa-sleutel</button>
-                <button data-mode="practice" data-clef="both">Beide sleutels</button>
-            </div>
+    <section class="hero is-fullheight is-light">
+        <div class="hero-body">
+            <div id="app-container" class="box container is-max-desktop">
+                <!-- Scherm 1: Hoofdmenu -->
+                <div id="menu-screen">
+                    <h1 class="title is-3 has-text-centered">Kies een modus</h1>
+                    
+                    <h2 class="subtitle is-5 mt-5">Oefenmodus</h2>
+                    <p class="has-text-grey">Oefen zonder tijdslimiet.</p>
+                    <div class="buttons is-centered">
+                        <button class="button is-primary is-light" data-mode="practice" data-clef="g">
+                            <span class="icon"><i class="material-icons">music_note</i></span>
+                            <span>sol-sleutel</span>
+                        </button>
+                        <button class="button is-primary is-light" data-mode="practice" data-clef="f">
+                            <span class="icon"><i class="material-icons">music_note</i></span>
+                            <span>fa-sleutel</span>
+                        </button>
+                        <button class="button is-primary is-light" data-mode="practice" data-clef="both">
+                            <span class="icon"><i class="material-icons">music_note</i></span>
+                            <span>beide sleutels</span>
+                        </button>
+                    </div>
 
-            <hr>
+                    <hr class="my-5">
 
-            <h2>Tijdrace</h2>
-            <p>Raad zoveel mogelijk noten in 60 seconden.</p>
-            <div class="button-group">
-                <button data-mode="time-attack" data-clef="g">Sol-sleutel</button>
-                <button data-mode="time-attack" data-clef="f">Fa-sleutel</button>
-                <button data-mode="time-attack" data-clef="both">Beide sleutels</button>
-            </div>
+                    <h2 class="subtitle is-5">Tijdrace</h2>
+                    <p class="has-text-grey">Raad zoveel mogelijk noten in 60 seconden.</p>
+                    <div class="buttons is-centered">
+                        <button class="button is-info" data-mode="time-attack" data-clef="g">
+                            <span class="icon"><i class="material-icons">timer</i></span>
+                            <span>sol-sleutel</span>
+                        </button>
+                        <button class="button is-info" data-mode="time-attack" data-clef="f">
+                            <span class="icon"><i class="material-icons">timer</i></span>
+                            <span>fa-sleutel</span>
+                        </button>
+                        <button class="button is-info" data-mode="time-attack" data-clef="both">
+                            <span class="icon"><i class="material-icons">timer</i></span>
+                            <span>beide sleutels</span>
+                        </button>
+                    </div>
 
-            <hr>
+                    <hr class="my-5">
 
-            <h2>Sprint (10 Noten)</h2>
-            <p>Beantwoord 10 noten zo snel en accuraat mogelijk.</p>
-            <div class="button-group">
-                <button data-mode="sprint" data-clef="g">Sol-sleutel</button>
-                <button data-mode="sprint" data-clef="f">Fa-sleutel</button>
-                <button data-mode="sprint" data-clef="both">Beide sleutels</button>
-            </div>
+                    <h2 class="subtitle is-5">Sprint (10 Noten)</h2>
+                    <p class="has-text-grey">Beantwoord 10 noten zo snel en accuraat mogelijk.</p>
+                    <div class="buttons is-centered">
+                        <button class="button is-success" data-mode="sprint" data-clef="g">
+                            <span class="icon"><i class="material-icons">flash_on</i></span>
+                            <span>sol-sleutel</span>
+                        </button>
+                        <button class="button is-success" data-mode="sprint" data-clef="f">
+                            <span class="icon"><i class="material-icons">flash_on</i></span>
+                            <span>fa-sleutel</span>
+                        </button>
+                        <button class="button is-success" data-mode="sprint" data-clef="both">
+                            <span class="icon"><i class="material-icons">flash_on</i></span>
+                            <span>beide sleutels</span>
+                        </button>
+                    </div>
 
-            <hr>
-            <h2>Debug</h2>
-            <p>Toon direct een rapport met voorbeeld fouten.</p>
-            <div class="button-group">
-                <button id="debug-report-button">Toon Debug Rapport</button>
+                    <hr class="my-5">
+                    <div id="debug-section" class="hidden">
+                        <h2 class="subtitle is-5">Debug</h2>
+                        <p class="has-text-grey">Toon direct een rapport met voorbeeld fouten.</p>
+                        <div class="buttons is-centered">
+                            <button id="debug-report-button" class="button is-warning is-light">
+                                <span class="icon"><i class="material-icons">bug_report</i></span>
+                                <span>Toon Debug Rapport</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scherm 2: Quiz -->
+                <div id="quiz-screen" class="hidden">
+                    <div class="level is-mobile">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <div id="score" class="tag is-large is-primary">Score: 0/0</div>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <div id="timer" class="tag is-large is-info hidden">Tijd: 60</div>
+                            </div>
+                            <div class="level-item">
+                                <button id="back-to-menu" class="button is-light">
+                                    <span class="icon"><i class="material-icons">arrow_back</i></span>
+                                    <span>Stoppen</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="title is-4 has-text-centered mt-4">Welke noot is dit?</h2>
+                    <div id="staff-container" class="box has-background-light p-4">
+                        <svg id="staff" width="400" height="200"></svg>
+                    </div>
+                    <div id="answer-buttons" class="buttons is-centered">
+                        <!-- Knoppen worden door JS gegenereerd -->
+                    </div>
+                </div>
+
+                <!-- Scherm 3: Rapport -->
+                <div id="report-screen" class="hidden">
+                    <h1 class="title is-3 has-text-centered">Resultaten</h1>
+                    <div id="report-summary" class="notification is-primary is-light">
+                        <!-- Score wordt door JS ingevuld -->
+                    </div>
+                    <h2 class="subtitle is-5 mt-5">Aandachtspunten</h2>
+                    <div id="problem-notes" class="box">
+                        <!-- Probleemnoten worden door JS ingevuld -->
+                    </div>
+                    <div class="buttons is-centered mt-5">
+                        <button id="restart-game" class="button is-primary">
+                            <span class="icon"><i class="material-icons">refresh</i></span>
+                            <span>Opnieuw spelen</span>
+                        </button>
+                        <button id="report-to-menu" class="button is-light">
+                            <span class="icon"><i class="material-icons">menu</i></span>
+                            <span>Terug naar menu</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Scherm 2: Quiz -->
-        <div id="quiz-screen" class="hidden">
-            <div id="quiz-header">
-                <div id="score">Score: 0/0</div>
-                <div id="timer" class="hidden">Tijd: 60</div>
-                <button id="back-to-menu">← Stoppen</button>
-            </div>
-            <div id="staff-container">
-                <svg id="staff" width="400" height="200"></svg>
-            </div>
-            <h2>Welke noot is dit?</h2>
-            <div id="answer-buttons" class="button-group">
-                <!-- Knoppen worden door JS gegenereerd -->
-            </div>
-        </div>
-
-        <!-- Scherm 3: Rapport -->
-        <div id="report-screen" class="hidden">
-            <h1>Resultaten</h1>
-            <div id="report-summary">
-                <!-- Score wordt door JS ingevuld -->
-            </div>
-            <h2>Aandachtspunten</h2>
-            <ul id="problem-notes">
-                <!-- Probleemnoten worden door JS ingevuld -->
-            </ul>
-            <div class="button-group">
-                <button id="restart-game">Opnieuw spelen</button>
-                <button id="report-to-menu">Terug naar menu</button>
-            </div>
-        </div>
-    </div>
-
+    </section>
     <script src="script.js"></script>
-</body>
-</html>
+</body></html>

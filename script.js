@@ -11,42 +11,42 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.notes = {
                 g: [
-                    { name: 'Fa', octave: 3, y: 5 },
-                    { name: 'Sol', octave: 3, y: 4.5 },
-                    { name: 'La', octave: 3, y: 4 },
-                    { name: 'Si', octave: 3, y: 3.5 },
-                    { name: 'Do', octave: 4, y: 3 },
-                    { name: 'Re', octave: 4, y: 2.5 },
-                    { name: 'Mi', octave: 4, y: 2 },
-                    { name: 'Fa', octave: 4, y: 1.5 },
-                    { name: 'Sol', octave: 4, y: 1 },
-                    { name: 'La', octave: 4, y: 0.5 },
-                    { name: 'Si', octave: 4, y: 0 },
-                    { name: 'Do', octave: 5, y: -0.5 },
-                    { name: 'Re', octave: 5, y: -1 },
-                    { name: 'Mi', octave: 5, y: -1.5 },
-                    { name: 'Fa', octave: 5, y: -2 },
-                    { name: 'Sol', octave: 5, y: -2.5 },
-                    { name: 'La', octave: 5, y: -3 },
+                    { name: 'fa', octave: 3, y: 5 },
+                    { name: 'sol', octave: 3, y: 4.5 },
+                    { name: 'la', octave: 3, y: 4 },
+                    { name: 'si', octave: 3, y: 3.5 },
+                    { name: 'do', octave: 4, y: 3 },
+                    { name: 're', octave: 4, y: 2.5 },
+                    { name: 'mi', octave: 4, y: 2 },
+                    { name: 'fa', octave: 4, y: 1.5 },
+                    { name: 'sol', octave: 4, y: 1 },
+                    { name: 'la', octave: 4, y: 0.5 },
+                    { name: 'si', octave: 4, y: 0 },
+                    { name: 'do', octave: 5, y: -0.5 },
+                    { name: 're', octave: 5, y: -1 },
+                    { name: 'mi', octave: 5, y: -1.5 },
+                    { name: 'fa', octave: 5, y: -2 },
+                    { name: 'sol', octave: 5, y: -2.5 },
+                    { name: 'la', octave: 5, y: -3 },
                 ],
                 f: [
-                    { name: 'La', octave: 1, y: 5 },
-                    { name: 'Si', octave: 1, y: 4.5 },
-                    { name: 'Do', octave: 2, y: 4 },
-                    { name: 'Re', octave: 2, y: 3.5 },
-                    { name: 'Mi', octave: 2, y: 3 },
-                    { name: 'Fa', octave: 2, y: 2.5 },
-                    { name: 'Sol', octave: 2, y: 2 },
-                    { name: 'La', octave: 2, y: 1.5 },
-                    { name: 'Si', octave: 2, y: 1 },
-                    { name: 'Do', octave: 3, y: 0.5 },
-                    { name: 'Re', octave: 3, y: 0 },
-                    { name: 'Mi', octave: 3, y: -0.5 },
-                    { name: 'Fa', octave: 3, y: -1 },
-                    { name: 'Sol', octave: 3, y: -1.5 },
-                    { name: 'La', octave: 3, y: -2 },
-                    { name: 'Si', octave: 3, y: -2.5 },
-                    { name: 'Do', octave: 4, y: -3 },
+                    { name: 'la', octave: 1, y: 5 },
+                    { name: 'si', octave: 1, y: 4.5 },
+                    { name: 'do', octave: 2, y: 4 },
+                    { name: 're', octave: 2, y: 3.5 },
+                    { name: 'mi', octave: 2, y: 3 },
+                    { name: 'fa', octave: 2, y: 2.5 },
+                    { name: 'sol', octave: 2, y: 2 },
+                    { name: 'la', octave: 2, y: 1.5 },
+                    { name: 'si', octave: 2, y: 1 },
+                    { name: 'do', octave: 3, y: 0.5 },
+                    { name: 're', octave: 3, y: 0 },
+                    { name: 'mi', octave: 3, y: -0.5 },
+                    { name: 'fa', octave: 3, y: -1 },
+                    { name: 'sol', octave: 3, y: -1.5 },
+                    { name: 'la', octave: 3, y: -2 },
+                    { name: 'si', octave: 3, y: -2.5 },
+                    { name: 'do', octave: 4, y: -3 },
                 ]
             };
         }
@@ -232,14 +232,19 @@ document.addEventListener('DOMContentLoaded', () => {
             this.answerButtonsContainer = document.getElementById('answer-buttons');
             this.reportSummary = document.getElementById('report-summary');
             this.problemNotesList = document.getElementById('problem-notes');
-            this.NOTE_NAMES = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si'];
+            this.NOTE_NAMES = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si']; // Lowercase
             this._initAnswerButtons();
         }
 
         bindStartGame(handler) {
             this.menuScreen.addEventListener('click', (event) => {
-                if (event.target.tagName === 'BUTTON') {
-                    const { mode, clef } = event.target.dataset;
+                let targetButton = event.target;
+                // If the click is on an icon or span inside the button, find the parent button
+                if (targetButton.tagName !== 'BUTTON') {
+                    targetButton = event.target.closest('button');
+                }
+                if (targetButton && targetButton.tagName === 'BUTTON') {
+                    const { mode, clef } = targetButton.dataset;
                     if (mode && clef) handler(mode, clef);
                 }
             });
@@ -324,12 +329,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setAnswerButtonsState(isCorrect, selectedName, correctName) {
             this.answerButtonsContainer.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('correct', 'incorrect');
+                // Remove all potential Bulma color/style classes
+                btn.classList.remove('is-primary', 'is-info', 'is-success', 'is-danger', 'is-light', 'is-warning');
                 if (btn.dataset.noteName === selectedName) {
-                    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                    btn.classList.add(isCorrect ? 'is-success' : 'is-danger');
                 }
                 if (!isCorrect && btn.dataset.noteName === correctName) {
-                    btn.classList.add('correct');
+                    btn.classList.add('is-success');
                 }
             });
         }
@@ -337,12 +343,13 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleAnswerButtons(disabled) {
             this.answerButtonsContainer.querySelectorAll('button').forEach(btn => {
                 btn.classList.toggle('disabled', disabled);
+                btn.disabled = disabled; // Add/remove the HTML disabled attribute
             });
         }
 
         resetAnswerButtons() {
             this.answerButtonsContainer.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('correct', 'incorrect');
+                btn.classList.remove('is-success', 'is-danger'); // Only remove Bulma feedback classes
             });
         }
 
@@ -350,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.answerButtonsContainer.innerHTML = '';
             this.NOTE_NAMES.forEach(name => {
                 const button = document.createElement('button');
+                button.classList.add('button'); // Only add 'button' class for neutral styling
                 button.textContent = name;
                 button.dataset.noteName = name;
                 this.answerButtonsContainer.appendChild(button);
@@ -509,6 +517,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = new QuizController(noteService, staffView, uiView);
 
     window.app = app; // Maak app globaal toegankelijk voor debugging
+
+    // Controleer URL parameter voor debug modus
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('debug') && urlParams.get('debug') === 'true') {
+        document.getElementById('debug-section').classList.remove('hidden');
+    }
 
     app.init();
 });
