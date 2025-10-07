@@ -9,6 +9,14 @@ body {
     font-family: 'Roboto', sans-serif; /* Keep Roboto as it's Material/Bulma friendly */
 }
 
+/* Language Switcher Dropdown */
+.hero .dropdown {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100; /* Ensure it's above other content */
+}
+
 /* Only custom elements not covered by Bulma */
 #staff-container {
     background-color: #fff; /* White background for staff */
