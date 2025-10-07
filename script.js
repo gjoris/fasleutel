@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'sol-sleutel',
             'f_clef': 'fa-sleutel',
             'both_clefs': 'beide sleutels',
-            'made_with_love': 'Gemaakt met ❤️ 🎵.',
+            'made_with_love': 'Gemaakt met ❤️ voor 🎵.',
             'github_link_text': 'Bekijk de code op GitHub.',
         },
         'en': {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'g-clef',
             'f_clef': 'f-clef',
             'both_clefs': 'both clefs',
-            'made_with_love': 'Made with ❤️ 🎵.',
+            'made_with_love': 'Made with ❤️ for 🎵.',
             'github_link_text': 'View code on GitHub.',
         },
         'fr': {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'clé de sol',
             'f_clef': 'clé de fa',
             'both_clefs': 'les deux clés',
-            'made_with_love': 'Fait avec ❤️ 🎵.',
+            'made_with_love': 'Fait avec ❤️ pour 🎵.',
             'github_link_text': 'Voir le code sur GitHub.',
         },
         'de': {
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'Violinschlüssel',
             'f_clef': 'Bassschlüssel',
             'both_clefs': 'beide Schlüssel',
-            'made_with_love': 'Mit ❤️ 🎵 gemacht.',
+            'made_with_love': 'Mit ❤️ für 🎵 gemacht.',
             'github_link_text': 'Code auf GitHub ansehen.',
         },
         'it': {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'chiave di violino',
             'f_clef': 'chiave di basso',
             'both_clefs': 'entrambe le chiavi',
-            'made_with_love': 'Fatto con ❤️ 🎵.',
+            'made_with_love': 'Fatto con ❤️ per 🎵.',
             'github_link_text': 'Vedi il codice su GitHub.',
         },
         'es': {
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'clave de sol',
             'f_clef': 'clave de fa',
             'both_clefs': 'ambas claves',
-            'made_with_love': 'Hecho con ❤️ 🎵.',
+            'made_with_love': 'Hecho con ❤️ para 🎵.',
             'github_link_text': 'Ver código en GitHub.',
         }
     };
