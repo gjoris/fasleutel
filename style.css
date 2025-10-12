@@ -45,11 +45,21 @@ body {
 
 /* Titles with gradient */
 .title {
+    color: #667eea; /* Fallback color */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 700;
+}
+
+/* Fallback for browsers that don't support background-clip */
+@supports not (background-clip: text) or not (-webkit-background-clip: text) {
+    .title {
+        background: none;
+        color: #667eea;
+        -webkit-text-fill-color: #667eea;
+    }
 }
 
 .subtitle {
