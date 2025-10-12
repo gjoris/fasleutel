@@ -322,11 +322,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         _drawClef(note) {
             const clefChar = note.clef === 'g' ? '𝄞' : '𝄢';
-            // G-clef: center on second line from bottom (line 1)
-            // F-clef: center on fourth line from bottom (line 3)
+            // G-clef: wraps around second line from bottom (y=3)
+            // F-clef: dots on fourth line from bottom (y=1)
             const clefY = note.clef === 'g'
-                ? this.STAFF_BASE_Y + 3 * this.STAFF_LINE_GAP // G-clef centered on line 1
-                : this.STAFF_BASE_Y + 1 * this.STAFF_LINE_GAP; // F-clef centered on line 3
+                ? this.STAFF_BASE_Y + 3.5 * this.STAFF_LINE_GAP // G-clef lower
+                : this.STAFF_BASE_Y + 1.5 * this.STAFF_LINE_GAP; // F-clef higher
             const clefSize = note.clef === 'g' ? 70 : 48;
 
             const clefText = this._createElementNS('text', {
