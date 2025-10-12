@@ -797,9 +797,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Site visits (homepage)
         let r1 = new XMLHttpRequest();
         r1.addEventListener('load', function() {
-            try {
-                document.getElementById('visitor-count').textContent = JSON.parse(this.responseText).count;
-            } catch(e) {
+            if (this.status === 200) {
+                try {
+                    const data = JSON.parse(this.responseText);
+                    document.getElementById('visitor-count').textContent = data.count || '0';
+                } catch(e) {
+                    console.error('Error parsing visitor count:', e);
+                    document.getElementById('visitor-count').textContent = '-';
+                }
+            } else {
+                console.error('Failed to fetch visitor count:', this.status);
                 document.getElementById('visitor-count').textContent = '-';
             }
         });
@@ -809,9 +816,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Quiz completions
         let r2 = new XMLHttpRequest();
         r2.addEventListener('load', function() {
-            try {
-                document.getElementById('quiz-count').textContent = JSON.parse(this.responseText).count;
-            } catch(e) {
+            if (this.status === 200) {
+                try {
+                    const data = JSON.parse(this.responseText);
+                    document.getElementById('quiz-count').textContent = data.count || '0';
+                } catch(e) {
+                    console.error('Error parsing quiz count:', e);
+                    document.getElementById('quiz-count').textContent = '0';
+                }
+            } else {
+                console.error('Failed to fetch quiz count:', this.status, this.responseText);
                 document.getElementById('quiz-count').textContent = '0';
             }
         });
