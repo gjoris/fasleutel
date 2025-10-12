@@ -6,8 +6,6 @@
     <title>Muzieknoten Quiz</title>
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <!-- Material Icons (voor extra iconen) -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Custom styles -->
     <link rel="stylesheet" href="style.css">
     <!-- GoatCounter Analytics -->
@@ -26,15 +24,15 @@
                     <p class="has-text-grey" data-i18n="practice_desc">Oefen zonder tijdslimiet.</p>
                     <div class="buttons is-centered">
                         <button class="button is-primary is-light" data-mode="practice" data-clef="g" data-i18n-text="g_clef">
-                            <span class="icon"><i class="material-icons">music_note</i></span>
+                            <span class="icon">🎵</span>
                             <span>sol-sleutel</span>
                         </button>
                         <button class="button is-primary is-light" data-mode="practice" data-clef="f" data-i18n-text="f_clef">
-                            <span class="icon"><i class="material-icons">music_note</i></span>
+                            <span class="icon">🎵</span>
                             <span>fa-sleutel</span>
                         </button>
                         <button class="button is-primary is-light" data-mode="practice" data-clef="both" data-i18n-text="both_clefs">
-                            <span class="icon"><i class="material-icons">music_note</i></span>
+                            <span class="icon">🎵</span>
                             <span>beide sleutels</span>
                         </button>
                     </div>
@@ -45,15 +43,15 @@
                     <p class="has-text-grey" data-i18n="time_attack_desc">Raad zoveel mogelijk noten in 60 seconden.</p>
                     <div class="buttons is-centered">
                         <button class="button is-info" data-mode="time-attack" data-clef="g" data-i18n-text="g_clef">
-                            <span class="icon"><i class="material-icons">timer</i></span>
+                            <span class="icon">⏱️</span>
                             <span>sol-sleutel</span>
                         </button>
                         <button class="button is-info" data-mode="time-attack" data-clef="f" data-i18n-text="f_clef">
-                            <span class="icon"><i class="material-icons">timer</i></span>
+                            <span class="icon">⏱️</span>
                             <span>fa-sleutel</span>
                         </button>
                         <button class="button is-info" data-mode="time-attack" data-clef="both" data-i18n-text="both_clefs">
-                            <span class="icon"><i class="material-icons">timer</i></span>
+                            <span class="icon">⏱️</span>
                             <span>beide sleutels</span>
                         </button>
                     </div>
@@ -64,15 +62,15 @@
                     <p class="has-text-grey" data-i18n="sprint_desc">Beantwoord 10 noten zo snel en accuraat mogelijk.</p>
                     <div class="buttons is-centered">
                         <button class="button is-success" data-mode="sprint" data-clef="g" data-i18n-text="g_clef">
-                            <span class="icon"><i class="material-icons">flash_on</i></span>
+                            <span class="icon">⚡</span>
                             <span>sol-sleutel</span>
                         </button>
                         <button class="button is-success" data-mode="sprint" data-clef="f" data-i18n-text="f_clef">
-                            <span class="icon"><i class="material-icons">flash_on</i></span>
+                            <span class="icon">⚡</span>
                             <span>fa-sleutel</span>
                         </button>
                         <button class="button is-success" data-mode="sprint" data-clef="both" data-i18n-text="both_clefs">
-                            <span class="icon"><i class="material-icons">flash_on</i></span>
+                            <span class="icon">⚡</span>
                             <span>beide sleutels</span>
                         </button>
                     </div>
@@ -83,7 +81,7 @@
                         <p class="has-text-grey" data-i18n="debug_desc">Toon direct een rapport met voorbeeld fouten.</p>
                         <div class="buttons is-centered">
                             <button id="debug-report-button" class="button is-warning is-light" data-i18n-text="show_debug_report">
-                                <span class="icon"><i class="material-icons">bug_report</i></span>
+                                <span class="icon">🐛</span>
                                 <span>Toon Debug Rapport</span>
                             </button>
                         </div>
@@ -92,13 +90,9 @@
                     <div class="dropdown is-right is-hoverable" style="position: absolute; top: 1rem; right: 1rem;">
                         <div class="dropdown-trigger">
                             <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
-                                <span class="icon is-small">
-                                    <i class="material-icons">language</i>
-                                </span>
+                                <span class="icon is-small">🌐</span>
                                 <span id="current-lang-display">NL</span>
-                                <span class="icon is-small">
-                                    <i class="material-icons">keyboard_arrow_down</i>
-                                </span>
+                                <span class="icon is-small">▼</span>
                             </button>
                         </div>
                         <div class="dropdown-menu" id="dropdown-menu4" role="menu">
@@ -128,7 +122,7 @@
                             </div>
                             <div class="level-item">
                                 <button id="back-to-menu" class="button is-light" data-i18n-text="stop">
-                                    <span class="icon"><i class="material-icons">arrow_back</i></span>
+                                    <span class="icon">◀️</span>
                                     <span>Stoppen</span>
                                 </button>
                             </div>
@@ -155,11 +149,11 @@
                     </div>
                     <div class="buttons is-centered mt-5">
                         <button id="restart-game" class="button is-primary" data-i18n-text="play_again">
-                            <span class="icon"><i class="material-icons">refresh</i></span>
+                            <span class="icon">🔄</span>
                             <span>Opnieuw spelen</span>
                         </button>
                         <button id="report-to-menu" class="button is-light" data-i18n-text="back_to_menu">
-                            <span class="icon"><i class="material-icons">menu</i></span>
+                            <span class="icon">📋</span>
                             <span>Terug naar menu</span>
                         </button>
                     </div>
