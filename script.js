@@ -322,11 +322,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         _drawClef(note) {
             const clefChar = note.clef === 'g' ? '𝄞' : '𝄢';
-            // Adjust clefY to be relative to the staff lines and viewBox
+            // G-clef: center on second line from bottom (line 1)
+            // F-clef: center on fourth line from bottom (line 3)
             const clefY = note.clef === 'g'
-                ? this.STAFF_BASE_Y + 3.8 * this.STAFF_LINE_GAP - 5 // Adjusted for better visual alignment
-                : this.STAFF_BASE_Y + 2.9 * this.STAFF_LINE_GAP + 5; // Adjusted for better visual alignment
-            const clefSize = note.clef === 'g' ? 70 : 48; // Unitless for SVG scaling
+                ? this.STAFF_BASE_Y + 3 * this.STAFF_LINE_GAP // G-clef centered on line 1
+                : this.STAFF_BASE_Y + 1 * this.STAFF_LINE_GAP; // F-clef centered on line 3
+            const clefSize = note.clef === 'g' ? 70 : 48;
 
             const clefText = this._createElementNS('text', {
                 x: '20', y: clefY, fill: '#000000', 'font-size': clefSize
