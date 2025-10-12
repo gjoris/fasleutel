@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // G-clef: wraps around second line from bottom (y=3)
             // F-clef: dots on fourth line from bottom (y=1)
             const clefY = note.clef === 'g'
-                ? this.STAFF_BASE_Y + 3.5 * this.STAFF_LINE_GAP // G-clef lower
+                ? this.STAFF_BASE_Y + 4 * this.STAFF_LINE_GAP // G-clef half line lower
                 : this.STAFF_BASE_Y + 2.5 * this.STAFF_LINE_GAP; // F-clef one line lower
             const clefSize = note.clef === 'g' ? 70 : 48;
 
