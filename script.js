@@ -322,12 +322,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         _drawClef(note) {
             const clefChar = note.clef === 'g' ? '𝄞' : '𝄢';
-            // G-clef: wraps around second line from bottom (y=3)
-            // F-clef: dots on fourth line from bottom (y=1)
+            // Make clef size relative to staff line gap for consistent scaling
+            const clefSize = note.clef === 'g' 
+                ? this.STAFF_LINE_GAP * 5.8  // G-clef proportional to staff
+                : this.STAFF_LINE_GAP * 4;   // F-clef proportional to staff
+            
+            // Detect if mobile/small screen based on viewport width
+            const isMobile = window.innerWidth < 768;
+            
+            // Position clefs relative to staff lines
+            // F-clef needs adjustment on mobile due to font rendering differences
             const clefY = note.clef === 'g'
-                ? this.STAFF_BASE_Y + 4 * this.STAFF_LINE_GAP // G-clef half line lower
-                : this.STAFF_BASE_Y + 2.5 * this.STAFF_LINE_GAP; // F-clef one line lower
-            const clefSize = note.clef === 'g' ? 70 : 48;
+                ? this.STAFF_BASE_Y + 4 * this.STAFF_LINE_GAP // G-clef
+                : this.STAFF_BASE_Y + (isMobile ? 3.5 : 2.5) * this.STAFF_LINE_GAP; // F-clef adjusted for mobile
 
             const clefText = this._createElementNS('text', {
                 x: '20', y: clefY, fill: '#000000', 'font-size': clefSize
