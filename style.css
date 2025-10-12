@@ -238,14 +238,17 @@ body {
 
 /* Footer */
 .footer {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     color: white;
     padding: 2rem 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .footer a {
     color: white;
     text-decoration: underline;
+    font-weight: 600;
 }
 
 .footer a:hover {
