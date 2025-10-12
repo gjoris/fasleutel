@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'made_with_love': 'Gemaakt met ❤️ voor 🎵.',
             'github_link_prefix': 'Bekijk de code op',
             'github_text': 'GitHub',
+            'counter_visitors': 'Bezoekers',
+            'counter_quizzes': 'Voltooide quizzen',
         },
         'en': {
             'choose_mode': 'Choose a mode',
@@ -60,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'made_with_love': 'Made with ❤️ for 🎵.',
             'github_link_prefix': 'View code on',
             'github_text': 'GitHub',
+            'counter_visitors': 'Visitors',
+            'counter_quizzes': 'Completed quizzes',
         },
         'fr': {
             'choose_mode': 'Choisissez un mode',
@@ -90,6 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
             'made_with_love': 'Fait avec ❤️ pour 🎵.',
             'github_link_prefix': 'Voir le code sur',
             'github_text': 'GitHub',
+            'counter_visitors': 'Visiteurs',
+            'counter_quizzes': 'Quiz complétés',
+        },
+            'github_text': 'GitHub',
         },
         'de': {
             'choose_mode': 'Wählen Sie einen Modus',
@@ -115,6 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
             'play_again': 'Nochmal spielen',
             'back_to_menu': 'Zurück zum Menü',
             'g_clef': 'Violinschlüssel',
+            'f_clef': 'Bassschlüssel',
+            'both_clefs': 'beide Schlüssel',
+            'made_with_love': 'Mit ❤️ für 🎵 gemacht.',
+            'github_link_prefix': 'Code ansehen auf',
+            'github_text': 'GitHub',
+            'counter_visitors': 'Besucher',
+            'counter_quizzes': 'Abgeschlossene Quiz',
+        },
             'f_clef': 'Bassschlüssel',
             'both_clefs': 'beide Schlüssel',
             'made_with_love': 'Mit ❤️ für 🎵 gemacht.',
@@ -147,6 +163,13 @@ document.addEventListener('DOMContentLoaded', () => {
             'g_clef': 'chiave di violino',
             'f_clef': 'chiave di basso',
             'both_clefs': 'entrambe le chiavi',
+            'made_with_love': 'Fatto con ❤️ per 🎵.',
+            'github_link_prefix': 'Visualizza il codice su',
+            'github_text': 'GitHub',
+            'counter_visitors': 'Visitatori',
+            'counter_quizzes': 'Quiz completati',
+        }
+    };
             'made_with_love': 'Fatto con ❤️ per 🎵.',
             'github_link_prefix': 'Vedi il codice su',
             'github_text': 'GitHub',
@@ -558,6 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.problemNotesList.appendChild(listItem);
                 });
             }
+            
             this.showScreen('report');
         }
 
@@ -662,6 +686,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         endGame() {
             this._stopTimer();
+            
+            // Track quiz completion in GoatCounter (for all modes)
+            if (window.goatcounter && this.totalQuestions > 0) {
+                window.goatcounter.count({
+                    path: '/quiz-completed',
+                    title: 'Quiz Completed',
+                    event: true
+                });
+            }
+            
             this.uiView.showReport({
                 score: this.score,
                 totalQuestions: this.totalQuestions,
@@ -768,4 +802,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     app.init();
+
+    // Fetch GoatCounter statistics
+    function updateCounters() {
+        // Site visits (homepage)
+        let r1 = new XMLHttpRequest();
+        r1.addEventListener('load', function() {
+            try {
+                document.getElementById('visitor-count').textContent = JSON.parse(this.responseText).count;
+            } catch(e) {
+                document.getElementById('visitor-count').textContent = '-';
+            }
+        });
+        r1.open('GET', 'https://gjoris.goatcounter.com/counter/' + encodeURIComponent('/fasleutel') + '.json');
+        r1.send();
+
+        // Quiz completions
+        let r2 = new XMLHttpRequest();
+        r2.addEventListener('load', function() {
+            try {
+                document.getElementById('quiz-count').textContent = JSON.parse(this.responseText).count;
+            } catch(e) {
+                document.getElementById('quiz-count').textContent = '0';
+            }
+        });
+        r2.open('GET', 'https://gjoris.goatcounter.com/counter/' + encodeURIComponent('/quiz-completed') + '.json');
+        r2.send();
+    }
+    
+    updateCounters();
 });
