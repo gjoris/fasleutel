@@ -97,8 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'counter_visitors': 'Visiteurs',
             'counter_quizzes': 'Quiz complétés',
         },
-            'github_text': 'GitHub',
-        },
         'de': {
             'choose_mode': 'Wählen Sie einen Modus',
             'practice_mode': 'Übungsmodus',
