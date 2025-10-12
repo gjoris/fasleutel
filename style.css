@@ -272,6 +272,12 @@ body {
     backdrop-filter: blur(10px);
     color: #2d3748;
     padding: 2rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer p {
+    color: #2d3748 !important;
+    margin-bottom: 0.5rem;
 }
 
 .footer a {
@@ -282,6 +288,10 @@ body {
 
 .footer a:hover {
     color: #764ba2;
+}
+
+.footer span {
+    color: #2d3748;
 }
 
 /* Hidden class */
@@ -321,6 +331,16 @@ body {
     
     .buttons.is-centered .button {
         margin-bottom: 0.5rem;
+    }
+    
+    .footer {
+        background: rgba(255, 255, 255, 0.98);
+        padding: 1.5rem 1rem;
+    }
+    
+    .footer p {
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
 }
 
