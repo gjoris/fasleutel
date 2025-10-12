@@ -829,7 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('quiz-count').textContent = '0';
             }
         });
-        r2.open('GET', 'https://gjoris.goatcounter.com/counter/' + encodeURIComponent('/quiz-completed') + '.json');
+        r2.open('GET', 'https://gjoris.goatcounter.com/counter//quiz-completed.json');
         r2.send();
     }
     
