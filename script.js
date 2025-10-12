@@ -129,12 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'counter_visitors': 'Besucher',
             'counter_quizzes': 'Abgeschlossene Quiz',
         },
-            'f_clef': 'Bassschlüssel',
-            'both_clefs': 'beide Schlüssel',
-            'made_with_love': 'Mit ❤️ für 🎵 gemacht.',
-            'github_link_prefix': 'Code ansehen auf',
-            'github_text': 'GitHub',
-        },
         'it': {
             'choose_mode': 'Scegli una modalità',
             'practice_mode': 'Modalità Pratica',
