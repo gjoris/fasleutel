@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Track quiz completion in GoatCounter (for all modes)
             if (window.goatcounter && this.totalQuestions > 0) {
                 window.goatcounter.count({
-                    path: '/quiz-completed',
+                    path: 'quiz-completed',
                     title: 'Quiz Completed',
                     event: true
                 });
@@ -829,7 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('quiz-count').textContent = '0';
             }
         });
-        r2.open('GET', 'https://gjoris.goatcounter.com/counter//quiz-completed.json');
+        r2.open('GET', 'https://gjoris.goatcounter.com/counter/quiz-completed.json');
         r2.send();
     }
     
