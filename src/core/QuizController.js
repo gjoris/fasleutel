@@ -37,22 +37,27 @@ export class QuizController {
         this.#uiView.bindDebugReport(this.showDebugReport.bind(this));
         this.#uiView.bindLanguageSwitcher(this.setLanguage.bind(this));
         this.#uiView.bindThemeToggle(this.toggleTheme.bind(this));
+        this.#uiView.bindLayoutSelector(this.setLayout.bind(this));
 
         const savedTheme = localStorage.getItem('fasleutel_theme') || 'light';
+        const savedLayout = localStorage.getItem('fasleutel_layout') || 'default';
+
         this.#uiView.setTheme(savedTheme);
+        this.#uiView.setLayout(savedLayout);
 
         applyTranslations(this.#uiView);
     }
 
     toggleTheme() {
-        const themes = ['light', 'dark', 'material', 'sepia'];
         const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        const currentIndex = themes.indexOf(currentTheme);
-        const nextIndex = (currentIndex + 1) % themes.length;
-        const newTheme = themes[nextIndex];
-
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         this.#uiView.setTheme(newTheme);
         localStorage.setItem('fasleutel_theme', newTheme);
+    }
+
+    setLayout(layout) {
+        this.#uiView.setLayout(layout);
+        localStorage.setItem('fasleutel_layout', layout);
     }
 
     startGame(mode, clef) {

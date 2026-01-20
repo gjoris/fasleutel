@@ -88,22 +88,43 @@
                     </div>
 
                     <div class="field is-grouped" style="position: absolute; top: 1rem; right: 1rem; gap: 0.5rem;">
+                        <!-- Theme Switch (Light/Dark) -->
                         <div class="control">
-                            <button id="theme-toggle" class="button is-small" aria-label="Toggle theme">
-                                <span class="icon is-small">🌓</span>
+                            <button id="theme-toggle" class="button is-small" title="Switch Light/Dark Mode">
+                                <span class="icon is-small">🌙</span>
                             </button>
                         </div>
+
+                        <!-- Layout Dropdown -->
                         <div class="control">
                             <div class="dropdown is-right is-hoverable">
                                 <div class="dropdown-trigger">
-                                    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
-                                        <span class="icon is-small">🌐</span>
-                                        <span id="current-lang-display">NL</span>
-                                        <span class="icon is-small">▼</span>
+                                    <button id="layout-dropdown-trigger" class="button is-small" aria-haspopup="true">
+                                        <span class="icon is-small">🎨</span>
+                                        <span id="current-layout-display">Standaard</span>
                                     </button>
                                 </div>
-                                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-                                    <div class="dropdown-content">
+                                <div id="layout-selector" class="dropdown-menu" role="menu">
+                                    <div id="layout-selector-content" class="dropdown-content">
+                                        <a href="#" class="dropdown-item" data-layout="default">Standaard</a>
+                                        <a href="#" class="dropdown-item" data-layout="material">Material</a>
+                                        <a href="#" class="dropdown-item" data-layout="sepia">Sepia</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Language Dropdown -->
+                        <div class="control">
+                            <div class="dropdown is-right is-hoverable">
+                                <div class="dropdown-trigger">
+                                    <button id="language-dropdown-trigger" class="button is-small" aria-haspopup="true">
+                                        <span class="icon is-small">🌐</span>
+                                        <span id="current-lang-display">NL</span>
+                                    </button>
+                                </div>
+                                <div id="language-selector" class="dropdown-menu" role="menu">
+                                    <div id="language-selector-content" class="dropdown-content">
                                         <a href="#" class="dropdown-item" data-lang="nl">NL</a>
                                         <a href="#" class="dropdown-item" data-lang="en">EN</a>
                                         <a href="#" class="dropdown-item" data-lang="fr">FR</a>

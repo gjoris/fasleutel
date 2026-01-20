@@ -13,6 +13,8 @@ export class UIView {
     #languageSelector;
     #currentLangDisplay;
     #themeToggle;
+    #layoutSelector;
+    #currentLayoutDisplay;
     #NOTE_NAMES = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
 
     constructor() {
@@ -28,9 +30,11 @@ export class UIView {
 
         this.#initAnswerButtons();
 
-        this.#languageSelector = document.querySelector('.dropdown-content');
+        this.#languageSelector = document.getElementById('language-selector-content');
         this.#currentLangDisplay = document.getElementById('current-lang-display');
         this.#themeToggle = document.getElementById('theme-toggle');
+        this.#layoutSelector = document.getElementById('layout-selector-content');
+        this.#currentLayoutDisplay = document.getElementById('current-layout-display');
     }
 
     bindThemeToggle(handler) {
@@ -39,31 +43,56 @@ export class UIView {
         }
     }
 
+    bindLayoutSelector(handler) {
+        if (this.#layoutSelector) {
+            this.#layoutSelector.addEventListener('click', (event) => {
+                if (event.target.classList.contains('dropdown-item')) {
+                    event.preventDefault();
+                    handler(event.target.dataset.layout);
+                }
+            });
+        }
+    }
+
     setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-
-        const icons = {
-            light: '🌙',
-
-            dark: '🎨',
-
-            material: '📜',
-
-            sepia: '☀️',
-        };
-
         if (this.#themeToggle) {
-            this.#themeToggle.innerHTML = `<span class="icon is-small">${icons[theme] || '🌙'}</span>`;
+            this.#themeToggle.innerHTML = `<span class="icon is-small">${theme === 'dark' ? '☀️' : '🌙'}</span>`;
+        }
+    }
+
+    setLayout(layout) {
+        document.documentElement.setAttribute('data-layout', layout);
+        if (this.#currentLayoutDisplay) {
+            const labels = {
+                default: 'Standaard',
+                material: 'Material',
+                sepia: 'Sepia',
+            };
+            this.#currentLayoutDisplay.textContent = labels[layout] || 'Standaard';
         }
     }
 
     bindLanguageSwitcher(handler) {
-        this.#languageSelector.addEventListener('click', (event) => {
-            if (event.target.classList.contains('dropdown-item')) {
-                event.preventDefault();
-                handler(event.target.dataset.lang);
-            }
-        });
+        if (this.#languageSelector) {
+            this.#languageSelector.querySelectorAll('.dropdown-item').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    handler(item.dataset.lang);
+                });
+            });
+        }
+    }
+
+    bindLayoutSelector(handler) {
+        if (this.#layoutSelector) {
+            this.#layoutSelector.querySelectorAll('.dropdown-item').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    handler(item.dataset.layout);
+                });
+            });
+        }
     }
 
     updateCurrentLanguageDisplay(lang) {

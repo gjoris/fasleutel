@@ -15,8 +15,10 @@ describe('App Integration', () => {
         document.body.innerHTML = `
             <div id="menu-screen">
                 <button id="theme-toggle"></button>
+                <span id="current-layout-display"></span>
+                <div id="layout-selector-content"></div>
                 <button id="start-practice" data-mode="practice" data-clef="g">Start</button>
-                <div class="dropdown-content"></div>
+                <div id="language-selector-content"></div>
             </div>
             <div id="quiz-screen" class="hidden">
                 <div id="score"></div>
@@ -70,5 +72,20 @@ describe('App Integration', () => {
         // The score string should change (either to 1/1 or 0/1)
         expect(scoreAfter).not.toBe(scoreBefore);
         expect(scoreAfter).toMatch(/Score: (0|1)\/1/);
+    });
+
+    it('should switch layout and persist it', () => {
+        // Mock a layout item in the DOM
+        const layoutContent = document.getElementById('layout-selector-content');
+        layoutContent.innerHTML = '<a href="#" class="dropdown-item" data-layout="sepia">Sepia</a>';
+        
+        // Re-bind because we changed the DOM items (direct listeners)
+        quizController.init(); 
+
+        const item = layoutContent.querySelector('[data-layout="sepia"]');
+        item.click();
+
+        expect(document.documentElement.getAttribute('data-layout')).toBe('sepia');
+        expect(localStorage.getItem('fasleutel_layout')).toBe('sepia');
     });
 });

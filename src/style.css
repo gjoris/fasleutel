@@ -2,12 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Special+Elite&display=swap');
 
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --primary-hover-gradient: linear-gradient(135deg, #5568d3 0%, #6a3f8f 100%);
-    --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    --info-hover-gradient: linear-gradient(135deg, #3d9ae5 0%, #00d9e5 100%);
-    --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    /* Default (Light) Base Colors */
     --glass-bg: rgba(255, 255, 255, 0.95);
     --text-main: #2d3748;
     --text-muted: #4a5568;
@@ -15,12 +10,16 @@
     --bg-light: #f7fafc;
     --staff-line: #000000;
     --staff-note: #000000;
-    --app-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     --body-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    /* Layout Constants */
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --font-main: 'Poppins', sans-serif;
     --border-radius: 20px;
+    --app-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
+/* Dark Mode Overrides (Universal) */
 [data-theme='dark'] {
     --glass-bg: rgba(26, 32, 44, 0.95);
     --text-main: #f7fafc;
@@ -32,42 +31,40 @@
     --body-bg: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
 }
 
-[data-theme='material'] {
+/* Material Layout Overrides */
+[data-layout='material'] {
     --font-main: 'Roboto', sans-serif;
-    --body-bg: #f5f5f5;
-    --glass-bg: #ffffff;
     --primary-gradient: #3f51b5;
-    --primary-hover-gradient: #303f9f;
-    --info-gradient: #2196f3;
-    --success-gradient: #4caf50;
-    --danger-gradient: #f44336;
-    --text-main: rgba(0, 0, 0, 0.87);
-    --text-muted: rgba(0, 0, 0, 0.6);
-    --border-color: #e0e0e0;
-    --bg-light: #fafafa;
-    --staff-line: #212121;
-    --staff-note: #3f51b5;
     --app-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     --border-radius: 4px;
 }
 
-[data-theme='sepia'] {
+[data-layout='material'] .title {
+    background: none !important;
+    color: var(--primary-gradient) !important;
+    -webkit-text-fill-color: var(--primary-gradient) !important;
+}
+
+/* Sepia Layout Overrides */
+[data-layout='sepia'] {
     --font-main: 'Special Elite', cursive;
+    --primary-gradient: #5d4037;
+    --border-radius: 2px;
+    --app-shadow: none;
+}
+
+[data-layout='sepia']:not([data-theme='dark']) {
     --body-bg: #d3c6a5;
     --glass-bg: #f4ecd8;
-    --primary-gradient: #5d4037;
-    --primary-hover-gradient: #4e342e;
-    --info-gradient: #795548;
     --text-main: #3e2723;
     --text-muted: #5d4037;
     --border-color: #d7ccc8;
     --bg-light: #efebe9;
     --staff-line: #3e2723;
     --staff-note: #3e2723;
-    --app-shadow: none;
-    --border-radius: 2px;
 }
 
+/* Global Styles */
 html, body {
     height: 100%;
     transition: all 0.3s ease;
@@ -86,7 +83,6 @@ html, body {
     max-width: 800px;
     margin: 0 auto;
     animation: fadeIn 0.5s ease-in;
-    color: var(--text-main);
 }
 
 .title {
@@ -95,66 +91,34 @@ html, body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 700;
-    color: var(--text-main);
 }
 
-[data-theme='material'] .title, 
-[data-theme='sepia'] .title,
 [data-theme='dark'] .title {
+    color: #a3bffa !important;
     background: none;
     -webkit-text-fill-color: initial;
-    background-clip: initial;
-    color: var(--primary-gradient) !important;
 }
 
-[data-theme='dark'] .title {
-    color: #a3bffa !important; /* Lighter shade for dark mode */
-}
-
-.subtitle {
-    color: var(--text-muted) !important;
-}
-
-p, span, li, label, div {
-    color: var(--text-main);
-}
-
-.has-text-grey {
-    color: var(--text-muted) !important;
-}
+.subtitle { color: var(--text-muted) !important; }
+p, span, li, label, div { color: var(--text-main); }
 
 .footer {
     background: var(--glass-bg);
-    color: var(--text-main);
     transition: all 0.3s ease;
+    padding: 2rem 1.5rem;
 }
 
-.footer p, .footer span, .footer a {
-    color: var(--text-main) !important;
-}
+.footer p, .footer span, .footer a { color: var(--text-main) !important; }
 
-.footer a {
-    text-decoration: underline;
+.button {
+    border-radius: calc(var(--border-radius) / 1.5);
     font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
 }
 
-.hero.is-light {
-    background: transparent;
-}
-
-/* Fix dropdown menu colors */
-.dropdown-content {
-    background-color: var(--glass-bg);
-    border: 1px solid var(--border-color);
-}
-
-.dropdown-item {
-    color: var(--text-main) !important;
-}
-
-.dropdown-item:hover {
-    background-color: var(--bg-light);
-}
+.button.is-primary { background: var(--primary-gradient); color: white; }
+.button.is-light { background: var(--bg-light); color: var(--text-muted); }
 
 #staff-container {
     background: var(--bg-light);
@@ -165,16 +129,7 @@ p, span, li, label, div {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     overflow: hidden;
-}
-
-#staff-container svg {
-    max-width: 100%;
-    width: 80vw;
-    height: auto;
-    display: block;
-    margin: 0 auto;
 }
 
 #answer-buttons {
@@ -184,30 +139,20 @@ p, span, li, label, div {
     margin-top: 1.5rem;
 }
 
-#problem-notes.box {
-    background: var(--glass-bg);
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius);
-}
-
-#problem-notes li {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.problem-note-item .mini-staff {
-    width: 120px;
-    background: var(--bg-light);
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    margin-right: 1rem;
-}
-
 .hidden { display: none !important; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.bounce { animation: bounce 0.3s ease-out; }
 
 @media screen and (max-width: 768px) {
     #app-container { padding: 1.5rem; }
-    #answer-buttons { grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); }
 }

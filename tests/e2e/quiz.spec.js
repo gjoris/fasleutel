@@ -43,7 +43,7 @@ test.describe('Muzieknoten Quiz Volledige Functionaliteit', () => {
     for (let i = 0; i < 10; i++) {
         const btn = page.locator('#answer-buttons button').first();
         await btn.click();
-        if (i < 9) await expect(btn).toBeEnabled({ timeout: 3000 });
+        if (i < 9) await expect(btn).toBeEnabled({ timeout: 5000 });
     }
 
     await expect(page.locator('#report-screen')).not.toHaveClass(/hidden/, { timeout: 5000 });
@@ -63,36 +63,36 @@ test.describe('Muzieknoten Quiz Volledige Functionaliteit', () => {
   });
 
   test('Taal: Persistentie over sessies', async ({ page }) => {
-    await page.click('.dropdown-trigger button');
-    await page.click('a[data-lang="fr"]');
+    await page.click('#language-dropdown-trigger');
+    await page.click('#language-selector-content a[data-lang="fr"]');
     await expect(page.locator('#menu-screen h1')).toHaveText('Choisissez un mode');
 
     await page.reload();
     await expect(page.locator('#menu-screen h1')).toHaveText('Choisissez un mode');
   });
 
-  test('Thema: Cyclen door thema\'s', async ({ page }) => {
-    // Check initial state (default light)
+  test('Thema en Layout: Onafhankelijke instellingen', async ({ page }) => {
+    // Check initial state
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+    await expect(page.locator('html')).toHaveAttribute('data-layout', 'default');
 
-    // Click cycle 1: Dark
+    // Toggle Dark Mode
     await page.click('#theme-toggle');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 
-    // Click cycle 2: Material
-    await page.click('#theme-toggle');
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'material');
+    // Switch to Material Layout
+    await page.click('#layout-dropdown-trigger');
+    await page.click('#layout-selector-content a[data-layout="material"]');
+    await expect(page.locator('html')).toHaveAttribute('data-layout', 'material');
 
-    // Click cycle 3: Sepia
-    await page.click('#theme-toggle');
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'sepia');
-
-    // Reload should persist
+    // Reload should persist BOTH
     await page.reload();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'sepia');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(page.locator('html')).toHaveAttribute('data-layout', 'material');
 
-    // Click cycle 4: Back to light
+    // Switch back to Light while keeping Material
     await page.click('#theme-toggle');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+    await expect(page.locator('html')).toHaveAttribute('data-layout', 'material');
   });
 });

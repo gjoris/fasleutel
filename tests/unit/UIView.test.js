@@ -9,9 +9,17 @@ describe('UIView', () => {
         document.body.innerHTML = `
             <div id="menu-screen">
                 <button id="theme-toggle"></button>
+                <span id="current-layout-display"></span>
+                <div id="layout-selector" class="dropdown-menu">
+                    <div id="layout-selector-content" class="dropdown-content">
+                        <a href="#" class="dropdown-item" data-layout="material">Material</a>
+                    </div>
+                </div>
                 <button data-mode="practice" data-clef="g"></button>
-                <div class="dropdown-content">
-                    <a href="#" class="dropdown-item" data-lang="en">EN</a>
+                <div id="language-selector" class="dropdown-menu">
+                    <div id="language-selector-content" class="dropdown-content">
+                        <a href="#" class="dropdown-item" data-lang="en">EN</a>
+                    </div>
                 </div>
             </div>
             <div id="quiz-screen" class="hidden">
@@ -126,7 +134,8 @@ describe('UIView', () => {
     it('should bind language switcher', () => {
         const handler = vi.fn();
         uiView.bindLanguageSwitcher(handler);
-        document.querySelector('.dropdown-item').click();
+        const item = document.querySelector('[data-lang="en"]');
+        item.click();
         expect(handler).toHaveBeenCalledWith('en');
     });
 
@@ -214,15 +223,17 @@ describe('UIView', () => {
     it('should set theme', () => {
         uiView.setTheme('dark');
         expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
-        expect(document.getElementById('theme-toggle').innerHTML).toContain('🎨');
-
-        uiView.setTheme('material');
-        expect(document.documentElement.getAttribute('data-theme')).toBe('material');
-        expect(document.getElementById('theme-toggle').innerHTML).toContain('📜');
+        expect(document.getElementById('theme-toggle').innerHTML).toContain('☀️');
 
         uiView.setTheme('light');
         expect(document.documentElement.getAttribute('data-theme')).toBe('light');
         expect(document.getElementById('theme-toggle').innerHTML).toContain('🌙');
+    });
+
+    it('should set layout', () => {
+        uiView.setLayout('material');
+        expect(document.documentElement.getAttribute('data-layout')).toBe('material');
+        expect(document.getElementById('current-layout-display').textContent).toBe('Material');
     });
 
     it('should bind theme toggle', () => {

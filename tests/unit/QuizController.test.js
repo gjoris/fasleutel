@@ -48,30 +48,33 @@ describe('QuizController', () => {
             updateCurrentLanguageDisplay: vi.fn(),
             updateStreak: vi.fn(),
             bindThemeToggle: vi.fn(),
-            setTheme: vi.fn()
+            bindLayoutSelector: vi.fn(),
+            setTheme: vi.fn(),
+            setLayout: vi.fn()
         };
 
         quizController = new QuizController(mockNoteService, mockStaffView, mockUIView);
     });
 
-    it('should load saved theme on init', () => {
+    it('should load saved theme and layout on init', () => {
         localStorage.setItem('fasleutel_theme', 'dark');
+        localStorage.setItem('fasleutel_layout', 'material');
         quizController.init();
         expect(mockUIView.setTheme).toHaveBeenCalledWith('dark');
+        expect(mockUIView.setLayout).toHaveBeenCalledWith('material');
     });
 
-    it('should cycle through themes', () => {
+    it('should toggle theme independently', () => {
         document.documentElement.setAttribute('data-theme', 'light');
         quizController.toggleTheme();
         expect(mockUIView.setTheme).toHaveBeenCalledWith('dark');
-        
-        document.documentElement.setAttribute('data-theme', 'dark');
-        quizController.toggleTheme();
-        expect(mockUIView.setTheme).toHaveBeenCalledWith('material');
+        expect(localStorage.getItem('fasleutel_theme')).toBe('dark');
+    });
 
-        document.documentElement.setAttribute('data-theme', 'sepia');
-        quizController.toggleTheme();
-        expect(mockUIView.setTheme).toHaveBeenCalledWith('light');
+    it('should set layout independently', () => {
+        quizController.setLayout('sepia');
+        expect(mockUIView.setLayout).toHaveBeenCalledWith('sepia');
+        expect(localStorage.getItem('fasleutel_layout')).toBe('sepia');
     });
 
     it('should initialize correctly and bind events', () => {
