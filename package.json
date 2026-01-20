@@ -1,0 +1,30 @@
+{
+  "name": "fasleutel",
+  "version": "1.0.0",
+  "description": "[English Version](README.en.md)",
+  "main": "script.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gjoris/fasleutel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gjoris/fasleutel/issues"
+  },
+  "homepage": "https://github.com/gjoris/fasleutel#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@vitest/coverage-v8": "^4.0.17",
+    "jsdom": "^27.4.0",
+    "serve": "^14.2.5",
+    "vitest": "^4.0.17"
+  }
+}

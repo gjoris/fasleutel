@@ -1,3 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+
+# Vitest / Coverage
+coverage/
+.vitest-result/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
 # Python
 venv/
 __pycache__/
@@ -8,6 +26,9 @@ __pycache__/
 
 # JetBrains IDEs
 .idea/
+
+# VS Code
+.vscode/
 
 # macOS
 .DS_Store
