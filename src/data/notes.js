@@ -36,5 +36,5 @@ export const NOTES_DATA = {
         { name: 'la', octave: 3, y: -2 },
         { name: 'si', octave: 3, y: -2.5 },
         { name: 'do', octave: 4, y: -3 },
-    ]
+    ],
 };

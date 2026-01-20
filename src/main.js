@@ -22,21 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCounters() {
         const fetchCount = (url, elementId) => {
             fetch(url)
-                .then(response => response.json())
-                .then(data => {
+                .then((response) => response.json())
+                .then((data) => {
                     const el = document.getElementById(elementId);
                     if (el) el.textContent = data.count || '0';
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.error(`Error fetching ${elementId}:`, err);
                     const el = document.getElementById(elementId);
                     if (el) el.textContent = '-';
                 });
         };
 
-        fetchCount('https://gjoris.goatcounter.com/counter/' + encodeURIComponent('/fasleutel') + '.json', 'visitor-count');
+        fetchCount(
+            'https://gjoris.goatcounter.com/counter/' + encodeURIComponent('/fasleutel') + '.json',
+            'visitor-count'
+        );
         fetchCount('https://gjoris.goatcounter.com/counter/quiz-completed.json', 'quiz-count');
     }
-    
+
     updateCounters();
 });

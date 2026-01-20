@@ -36,8 +36,19 @@ export class QuizController {
         this.#uiView.bindKeyboardAnswers(this.handleAnswer.bind(this));
         this.#uiView.bindDebugReport(this.showDebugReport.bind(this));
         this.#uiView.bindLanguageSwitcher(this.setLanguage.bind(this));
+        this.#uiView.bindThemeToggle(this.toggleTheme.bind(this));
+
+        const savedTheme = localStorage.getItem('fasleutel_theme') || 'light';
+        this.#uiView.setTheme(savedTheme);
 
         applyTranslations(this.#uiView);
+    }
+
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        this.#uiView.setTheme(newTheme);
+        localStorage.setItem('fasleutel_theme', newTheme);
     }
 
     startGame(mode, clef) {

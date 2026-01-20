@@ -3,22 +3,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
+
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
     --primary-hover-gradient: linear-gradient(135deg, #5568d3 0%, #6a3f8f 100%);
+
     --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
     --info-hover-gradient: linear-gradient(135deg, #3d9ae5 0%, #00d9e5 100%);
+
     --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+
     --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+
     --glass-bg: rgba(255, 255, 255, 0.95);
+
     --text-main: #2d3748;
+
     --text-muted: #4a5568;
+
     --border-color: #e2e8f0;
+
     --bg-light: #f7fafc;
+
+    --staff-line: #000000;
+
+    --staff-note: #000000;
+
 }
 
-html, body {
-    height: 100%;
+
+
+[data-theme='dark'] {
+
+    --glass-bg: rgba(26, 32, 44, 0.95);
+
+    --text-main: #f7fafc;
+
+    --text-muted: #a0aec0;
+
+    --border-color: #4a5568;
+
+    --bg-light: #2d3748;
+
+    --staff-line: #cbd5e0;
+
+    --staff-note: #ffffff;
+
 }
+
+
+
+html,
+
+body {
+
+    height: 100%;
+
+    transition: background 0.3s ease;
+
+}
+
+
 
 body {
     font-family: 'Poppins', sans-serif;

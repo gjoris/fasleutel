@@ -20,11 +20,11 @@ export function translate(key, replacements = {}) {
 }
 
 export function applyTranslations(uiView) {
-    document.querySelectorAll('[data-i18n]').forEach(element => {
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
         const key = element.dataset.i18n;
         element.textContent = translate(key);
     });
-    document.querySelectorAll('button[data-i18n-text]').forEach(button => {
+    document.querySelectorAll('button[data-i18n-text]').forEach((button) => {
         const key = button.dataset.i18nText;
         const span = button.querySelector('span:last-child');
         if (span) span.textContent = translate(key);
