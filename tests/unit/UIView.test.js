@@ -8,6 +8,7 @@ describe('UIView', () => {
     beforeEach(() => {
         document.body.innerHTML = `
             <div id="menu-screen">
+                <button id="theme-toggle"></button>
                 <button data-mode="practice" data-clef="g"></button>
                 <div class="dropdown-content">
                     <a href="#" class="dropdown-item" data-lang="en">EN</a>
@@ -76,7 +77,7 @@ describe('UIView', () => {
     it('should reset answer buttons', () => {
         uiView.resetAnswerButtons();
         const buttons = document.querySelectorAll('#answer-buttons button');
-        buttons.forEach(btn => {
+        buttons.forEach((btn) => {
             expect(btn.classList.contains('is-success')).toBe(false);
             expect(btn.classList.contains('is-danger')).toBe(false);
         });
@@ -98,11 +99,11 @@ describe('UIView', () => {
 
     it('should toggle answer buttons', () => {
         uiView.toggleAnswerButtons(true);
-        document.querySelectorAll('#answer-buttons button').forEach(btn => {
+        document.querySelectorAll('#answer-buttons button').forEach((btn) => {
             expect(btn.disabled).toBe(true);
         });
         uiView.toggleAnswerButtons(false);
-        document.querySelectorAll('#answer-buttons button').forEach(btn => {
+        document.querySelectorAll('#answer-buttons button').forEach((btn) => {
             expect(btn.disabled).toBe(false);
         });
     });
@@ -140,7 +141,7 @@ describe('UIView', () => {
     it('should ignore keyboard if screen hidden or wrong key', () => {
         const handler = vi.fn();
         uiView.bindKeyboardAnswers(handler);
-        
+
         // Hidden screen
         document.getElementById('quiz-screen').classList.add('hidden');
         window.dispatchEvent(new KeyboardEvent('keydown', { key: '1' }));
@@ -157,7 +158,7 @@ describe('UIView', () => {
             end: vi.fn(),
             restart: vi.fn(),
             reportMenu: vi.fn(),
-            debug: vi.fn()
+            debug: vi.fn(),
         };
         uiView.bindEndGame(handlers.end);
         uiView.bindRestartGame(handlers.restart);
@@ -169,24 +170,25 @@ describe('UIView', () => {
         document.getElementById('report-to-menu').click();
         document.getElementById('debug-report-button').click();
 
-        Object.values(handlers).forEach(h => expect(h).toHaveBeenCalled());
+        Object.values(handlers).forEach((h) => expect(h).toHaveBeenCalled());
     });
 
     it('should show report with sorting', () => {
         const mockStaffView = {
             renderMini: vi.fn(),
-            SVG_NAMESPACE: 'http://www.w3.org/2000/svg'
+            SVG_NAMESPACE: 'http://www.w3.org/2000/svg',
         };
         const incorrectAnswers = {
-            'noteA': { note: { name: 'do', y: 3, clef: 'g' }, count: 2 },
-            'noteB': { note: { name: 're', y: 2, clef: 'g' }, count: 5 }
+            noteA: { note: { name: 'do', y: 3, clef: 'g' }, count: 2 },
+            noteB: { note: { name: 're', y: 2, clef: 'g' }, count: 5 },
         };
 
         uiView.showReport({
             score: 5,
             totalQuestions: 10,
             incorrectAnswers,
-            staffView: mockStaffView
+            staffView: mockStaffView,
+            maxStreak: 3,
         });
 
         const listItems = document.querySelectorAll('.problem-note-item');
@@ -201,8 +203,28 @@ describe('UIView', () => {
             score: 10,
             totalQuestions: 10,
             incorrectAnswers: {},
-            staffView: {}
+            staffView: {},
+            maxStreak: 10,
         });
-        expect(document.getElementById('problem-notes').textContent).toContain(translate('perfect_score'));
+        expect(document.getElementById('problem-notes').textContent).toContain(
+            translate('perfect_score')
+        );
+    });
+
+    it('should set theme', () => {
+        uiView.setTheme('dark');
+        expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+        expect(document.getElementById('theme-toggle').innerHTML).toContain('☀️');
+
+        uiView.setTheme('light');
+        expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+        expect(document.getElementById('theme-toggle').innerHTML).toContain('🌙');
+    });
+
+    it('should bind theme toggle', () => {
+        const handler = vi.fn();
+        uiView.bindThemeToggle(handler);
+        document.getElementById('theme-toggle').click();
+        expect(handler).toHaveBeenCalled();
     });
 });

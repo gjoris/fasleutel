@@ -46,10 +46,25 @@ describe('QuizController', () => {
             toggleAnswerButtons: vi.fn(),
             resetAnswerButtons: vi.fn(),
             updateCurrentLanguageDisplay: vi.fn(),
-            updateStreak: vi.fn()
+            updateStreak: vi.fn(),
+            bindThemeToggle: vi.fn(),
+            setTheme: vi.fn()
         };
 
         quizController = new QuizController(mockNoteService, mockStaffView, mockUIView);
+    });
+
+    it('should load saved theme on init', () => {
+        localStorage.setItem('fasleutel_theme', 'dark');
+        quizController.init();
+        expect(mockUIView.setTheme).toHaveBeenCalledWith('dark');
+    });
+
+    it('should toggle theme', () => {
+        document.documentElement.setAttribute('data-theme', 'light');
+        quizController.toggleTheme();
+        expect(mockUIView.setTheme).toHaveBeenCalledWith('dark');
+        expect(localStorage.getItem('fasleutel_theme')).toBe('dark');
     });
 
     it('should initialize correctly and bind events', () => {

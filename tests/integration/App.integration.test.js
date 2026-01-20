@@ -14,6 +14,7 @@ describe('App Integration', () => {
         // Setup a real DOM environment
         document.body.innerHTML = `
             <div id="menu-screen">
+                <button id="theme-toggle"></button>
                 <button id="start-practice" data-mode="practice" data-clef="g">Start</button>
                 <div class="dropdown-content"></div>
             </div>

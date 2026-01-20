@@ -70,4 +70,21 @@ test.describe('Muzieknoten Quiz Volledige Functionaliteit', () => {
     await page.reload();
     await expect(page.locator('#menu-screen h1')).toHaveText('Choisissez un mode');
   });
+
+  test('Thema: Wisselen tussen licht en donker', async ({ page }) => {
+    // Check initial state (default light)
+    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
+
+    // Click toggle
+    await page.click('#theme-toggle');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+
+    // Reload should persist
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+
+    // Back to light
+    await page.click('#theme-toggle');
+    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
+  });
 });
