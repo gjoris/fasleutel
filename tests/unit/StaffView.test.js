@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { StaffView } from '../src/ui/StaffView.js';
+import { StaffView } from '../../src/ui/StaffView.js';
 
 describe('StaffView', () => {
     let svgElement;

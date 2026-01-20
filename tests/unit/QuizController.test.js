@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { QuizController } from '../src/core/QuizController.js';
-import { NoteService } from '../src/core/NoteService.js';
+import { QuizController } from '../../src/core/QuizController.js';
+import { NoteService } from '../../src/core/NoteService.js';
 
 describe('QuizController', () => {
     let quizController;

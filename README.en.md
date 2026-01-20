@@ -42,10 +42,13 @@ This application is built with a focus on code quality and maintainability:
 The codebase is fully covered by an extensive test suite:
 
 *   **Unit & Integration:** Running on Vitest (100% line coverage).
+    *   Unit tests: `tests/unit/`
+    *   Integration tests: `tests/integration/`
     ```bash
     npm test
     ```
 *   **End-to-End (E2E):** Full browser tests with Playwright.
+    *   E2E tests: `tests/e2e/`
     ```bash
     npm run test:e2e
     ```

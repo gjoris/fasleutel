@@ -42,10 +42,13 @@ Deze applicatie is modern opgezet met een focus op codekwaliteit en onderhoudbaa
 De codebase is volledig gedekt door een uitgebreide test-suite:
 
 *   **Unit & Integratie:** Draaien op Vitest (100% line coverage).
+    *   Unit tests: `tests/unit/`
+    *   Integratie tests: `tests/integration/`
     ```bash
     npm test
     ```
 *   **End-to-End (E2E):** Volledige browser-tests met Playwright.
+    *   E2E tests: `tests/e2e/`
     ```bash
     npm run test:e2e
     ```

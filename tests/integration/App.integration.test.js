@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { QuizController } from '../src/core/QuizController.js';
-import { NoteService } from '../src/core/NoteService.js';
-import { StaffView } from '../src/ui/StaffView.js';
-import { UIView } from '../src/ui/UIView.js';
+import { QuizController } from '../../src/core/QuizController.js';
+import { NoteService } from '../../src/core/NoteService.js';
+import { StaffView } from '../../src/ui/StaffView.js';
+import { UIView } from '../../src/ui/UIView.js';
 
 describe('App Integration', () => {
     let noteService;

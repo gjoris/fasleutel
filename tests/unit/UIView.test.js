@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { UIView } from '../src/ui/UIView.js';
-import { translate } from '../src/utils/i18n.js';
+import { UIView } from '../../src/ui/UIView.js';
+import { translate } from '../../src/utils/i18n.js';
 
 describe('UIView', () => {
     let uiView;

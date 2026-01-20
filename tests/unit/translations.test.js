@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { setLanguage, getCurrentLanguage, translate, applyTranslations } from '../src/utils/i18n.js';
+import { setLanguage, getCurrentLanguage, translate, applyTranslations } from '../../src/utils/i18n.js';
 
 describe('translations', () => {
     beforeEach(() => {
