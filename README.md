@@ -11,34 +11,61 @@ De live versie van deze applicatie is beschikbaar als GitHub Page: [https://gjor
 ## ✨ Kenmerken
 
 *   **Oefenmodus:** Leer in je eigen tempo zonder tijdsdruk.
-*   **Tijdrace:** Test je snelheid en nauwkeurigheid door zoveel mogelijk noten in 60 seconden te raden.
+*   **Tijdrace:** Test je snelheid en nauwkeurigheid in 60 seconden.
 *   **Sprint (10 Noten):** Beantwoord 10 noten zo snel en accuraat mogelijk.
-*   **Meerdere Sleutels:** Oefen specifiek met de sol-sleutel (G-sleutel), fa-sleutel (F-sleutel), of een combinatie van beide.
-*   **Visuele Feedback:** Krijg direct feedback op je antwoorden en zie welke noten je moeilijk vindt in het eindrapport.
-*   **Meertalig:** Wissel eenvoudig van taal met de ingebouwde taalwisselaar.
-*   **Responsief Ontwerp:** Speel de quiz op elk apparaat, van desktop tot mobiel.
+*   **Toetsenbordondersteuning:** Gebruik de toetsen `1` t/m `7` voor snelle antwoorden.
+*   **Slimme Randomisatie:** Nooit meer twee keer dezelfde noot achter elkaar.
+*   **Responsief Ontwerp:** Speel op desktop, tablet of mobiel.
 
-## 🚀 Technologieën
+## 🚀 Technologieën & Architectuur
 
-Deze applicatie is gebouwd met de volgende technologieën:
+Deze applicatie is modern opgezet met een focus op codekwaliteit en onderhoudbaarheid:
 
-*   **HTML5:** Voor de structuur van de webpagina.
-*   **CSS3 (Bulma Framework):** Voor een modern en responsief ontwerp.
-*   **JavaScript (Vanilla JS):** Voor de interactieve quizlogica en DOM-manipulatie.
-*   **SVG:** Voor het dynamisch tekenen van de notenbalk en noten.
-*   **Material Icons:** Voor de iconen in de gebruikersinterface.
+*   **Vanilla JavaScript (ES Modules):** Georganiseerd in een modulaire mappenstructuur.
+*   **Encapsulation:** Gebruik van `#privateFields` om interne staat te beschermen.
+*   **SVG:** Dynamisch getekende notenbalken en noten.
+*   **CSS Variabelen:** Voor consistent en makkelijk aanpasbaar ontwerp.
+*   **Bulma CSS:** Voor een solide basis in styling.
+
+### Mappenstructuur
+```text
+/src
+├── core/       # Kernlogica (NoteService, QuizController)
+├── ui/         # Weergave (StaffView, UIView)
+├── data/       # Ruwe data (noten, vertalingen)
+├── utils/      # Helpers (i18n)
+└── main.js     # Applicatie toegangspunt
+```
+
+## 🧪 Testen
+
+De codebase is volledig gedekt door een uitgebreide test-suite:
+
+*   **Unit & Integratie:** Draaien op Vitest (100% line coverage).
+    ```bash
+    npm test
+    ```
+*   **End-to-End (E2E):** Volledige browser-tests met Playwright.
+    ```bash
+    npm run test:e2e
+    ```
+*   **Coverage:** Genereer een overzicht van de testdekking.
+    ```bash
+    npm run coverage
+    ```
+
+## 🛠️ Installatie (voor ontwikkelaars)
+
+1.  Clone de repository: `git clone https://github.com/gjoris/fasleutel.git`
+2.  Installeer dependencies: `npm install`
+3.  Start een lokale server: `npx serve` (of open `index.html` direct)
 
 ## 🎮 Hoe te Spelen
 
-1.  **Kies een Modus:** Selecteer op het startscherm een van de drie spelmodi (Oefenmodus, Tijdrace, Sprint) en de gewenste sleutel (sol-sleutel, fa-sleutel, of beide).
-2.  **Raad de Noot:** Er verschijnt een noot op de notenbalk. Klik op de juiste nootnaam onderaan het scherm.
-3.  **Feedback:** Je krijgt direct te zien of je antwoord correct was.
-4.  **Eindrapport:** Na afloop van een spelmodus (Tijdrace of Sprint) krijg je een rapport te zien met je score en de noten die je moeilijk vond.
-
-## 🌐 Taalwisselaar
-
-De applicatie ondersteunt meerdere talen. Je kunt de taal wijzigen via het dropdown-menu rechtsboven in het hoofdmenu. Klik op het vlag-icoon (of de huidige taalcode) en selecteer de gewenste taal.
+1.  **Kies een Modus:** Selecteer een van de modi en de gewenste sleutel.
+2.  **Raad de Noot:** Klik op de knoppen of gebruik je toetsenbord (`1-7`).
+3.  **Feedback:** Zie direct of je goed zit en leer van je fouten in het eindrapport.
 
 ## 📄 Licentie
 
-Dit project is gelicentieerd onder de MIT-licentie. Zie het [LICENSE](LICENSE) bestand voor meer details.
+Gelicentieerd onder de MIT-licentie. Zie het [LICENSE](LICENSE) bestand.

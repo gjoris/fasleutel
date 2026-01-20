@@ -11,34 +11,61 @@ The live version of this application is available as a GitHub Page: [https://gjo
 ## ✨ Features
 
 *   **Practice Mode:** Learn at your own pace without time pressure.
-*   **Time Attack:** Test your speed and accuracy by guessing as many notes as possible in 60 seconds.
+*   **Time Attack:** Test your speed and accuracy in 60 seconds.
 *   **Sprint (10 Notes):** Answer 10 notes as quickly and accurately as possible.
-*   **Multiple Clefs:** Practice specifically with the treble clef (G-clef), bass clef (F-clef), or a combination of both.
-*   **Visual Feedback:** Get immediate feedback on your answers and see which notes you find difficult in the final report.
-*   **Multilingual:** Easily switch languages with the built-in language switcher.
-*   **Responsive Design:** Play the quiz on any device, from desktop to mobile.
+*   **Keyboard Support:** Use keys `1` to `7` for fast responses.
+*   **Smart Randomization:** No more immediate note repeats.
+*   **Responsive Design:** Play on desktop, tablet, or mobile.
 
-## 🚀 Technologies
+## 🚀 Technologies & Architecture
 
-This application is built with the following technologies:
+This application is built with a focus on code quality and maintainability:
 
-*   **HTML5:** For the structure of the web page.
-*   **CSS3 (Bulma Framework):** For a modern and responsive design.
-*   **JavaScript (Vanilla JS):** For interactive quiz logic and DOM manipulation.
-*   **SVG:** For dynamically drawing the staff and notes.
-*   **Material Icons:** For the icons in the user interface.
+*   **Vanilla JavaScript (ES Modules):** Organized in a modular folder structure.
+*   **Encapsulation:** Uses `#privateFields` to protect internal state.
+*   **SVG:** Dynamically drawn staff and notes.
+*   **CSS Variables:** For consistent and easily adjustable design.
+*   **Bulma CSS:** For a solid styling base.
+
+### Folder Structure
+```text
+/src
+├── core/       # Core logic (NoteService, QuizController)
+├── ui/         # Presentation (StaffView, UIView)
+├── data/       # Raw data (notes, translations)
+├── utils/      # Helpers (i18n)
+└── main.js     # Application entry point
+```
+
+## 🧪 Testing
+
+The codebase is fully covered by an extensive test suite:
+
+*   **Unit & Integration:** Running on Vitest (100% line coverage).
+    ```bash
+    npm test
+    ```
+*   **End-to-End (E2E):** Full browser tests with Playwright.
+    ```bash
+    npm run test:e2e
+    ```
+*   **Coverage:** Generate a test coverage overview.
+    ```bash
+    npm run coverage
+    ```
+
+## 🛠️ Installation (for developers)
+
+1.  Clone the repository: `git clone https://github.com/gjoris/fasleutel.git`
+2.  Install dependencies: `npm install`
+3.  Start a local server: `npx serve` (or open `index.html` directly)
 
 ## 🎮 How to Play
 
-1.  **Choose a Mode:** On the start screen, select one of the three game modes (Practice Mode, Time Attack, Sprint) and the desired clef (treble clef, bass clef, or both).
-2.  **Guess the Note:** A note will appear on the staff. Click the correct note name at the bottom of the screen.
-3.  **Feedback:** You will immediately see if your answer was correct.
-4.  **Final Report:** After completing a game mode (Time Attack or Sprint), you will see a report with your score and the notes you found difficult.
-
-## 🌐 Language Switcher
-
-The application supports multiple languages. You can change the language via the dropdown menu in the top right corner of the main menu. Click the flag icon (or the current language code) and select the desired language.
+1.  **Choose a Mode:** Select a mode and your preferred clef.
+2.  **Guess the Note:** Click the buttons or use your keyboard (`1-7`).
+3.  **Feedback:** Get immediate results and learn from your mistakes in the final report.
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
