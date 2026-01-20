@@ -47,6 +47,15 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.bounce {
+    animation: bounce 0.3s ease-out;
+}
+
 /* Titles with gradient */
 .title {
     background: var(--primary-gradient);

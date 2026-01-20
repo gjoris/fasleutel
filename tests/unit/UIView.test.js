@@ -16,6 +16,7 @@ describe('UIView', () => {
             <div id="quiz-screen" class="hidden">
                 <div id="score"></div>
                 <div id="timer" class="hidden"></div>
+                <div id="streak-display" class="hidden"></div>
                 <div id="answer-buttons"></div>
                 <button id="back-to-menu"></button>
             </div>
@@ -60,6 +61,16 @@ describe('UIView', () => {
     it('should update current language display', () => {
         uiView.updateCurrentLanguageDisplay('fr');
         expect(document.getElementById('current-lang-display').textContent).toBe('FR');
+    });
+
+    it('should update streak display', () => {
+        uiView.updateStreak(5);
+        const display = document.getElementById('streak-display');
+        expect(display.textContent).toContain('5');
+        expect(display.classList.contains('hidden')).toBe(false);
+
+        uiView.updateStreak(0);
+        expect(display.classList.contains('hidden')).toBe(true);
     });
 
     it('should reset answer buttons', () => {

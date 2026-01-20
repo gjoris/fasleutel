@@ -6,6 +6,7 @@ export class UIView {
     #reportScreen;
     #scoreDisplay;
     #timerDisplay;
+    #streakDisplay;
     #answerButtonsContainer;
     #reportSummary;
     #problemNotesList;
@@ -19,10 +20,11 @@ export class UIView {
         this.#reportScreen = document.getElementById('report-screen');
         this.#scoreDisplay = document.getElementById('score');
         this.#timerDisplay = document.getElementById('timer');
+        this.#streakDisplay = document.getElementById('streak-display');
         this.#answerButtonsContainer = document.getElementById('answer-buttons');
         this.#reportSummary = document.getElementById('report-summary');
         this.#problemNotesList = document.getElementById('problem-notes');
-        
+
         this.#initAnswerButtons();
 
         this.#languageSelector = document.querySelector('.dropdown-content');
@@ -40,6 +42,18 @@ export class UIView {
 
     updateCurrentLanguageDisplay(lang) {
         this.#currentLangDisplay.textContent = lang.toUpperCase();
+    }
+
+    updateStreak(streak) {
+        if (!this.#streakDisplay) return;
+        this.#streakDisplay.textContent = `🔥 ${streak}`;
+        if (streak > 0) {
+            this.#streakDisplay.classList.remove('hidden');
+            this.#streakDisplay.classList.add('bounce');
+            setTimeout(() => this.#streakDisplay.classList.remove('bounce'), 300);
+        } else {
+            this.#streakDisplay.classList.add('hidden');
+        }
     }
 
     bindStartGame(handler) {
@@ -79,7 +93,7 @@ export class UIView {
     bindKeyboardAnswers(handler) {
         window.addEventListener('keydown', (event) => {
             if (this.#quizScreen.classList.contains('hidden')) return;
-            
+
             const key = event.key;
             if (key >= '1' && key <= '7') {
                 const index = parseInt(key) - 1;
@@ -112,17 +126,22 @@ export class UIView {
         this.#timerDisplay.classList.add('hidden');
     }
 
-    showReport({ score, totalQuestions, incorrectAnswers, staffView }) {
+    showReport({ score, totalQuestions, incorrectAnswers, staffView, maxStreak }) {
         const accuracy = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-        this.#reportSummary.innerHTML = `${translate('results')}: <strong>${score} / ${totalQuestions}</strong> (${accuracy}%)`;
+        this.#reportSummary.innerHTML = `
+            <p>${translate('results')}: <strong>${score} / ${totalQuestions}</strong> (${accuracy}%)</p>
+            <p>${translate('max_streak')}: <strong>${maxStreak}</strong> 🔥</p>
+        `;
 
         this.#problemNotesList.innerHTML = '';
-        const sortedProblemNotes = Object.values(incorrectAnswers).sort((a, b) => b.count - a.count);
+        const sortedProblemNotes = Object.values(incorrectAnswers).sort(
+            (a, b) => b.count - a.count
+        );
 
         if (sortedProblemNotes.length === 0) {
             this.#problemNotesList.innerHTML = `<li>${translate('perfect_score')}</li>`;
         } else {
-            sortedProblemNotes.forEach(problemData => {
+            sortedProblemNotes.forEach((problemData) => {
                 const listItem = document.createElement('li');
                 listItem.classList.add('problem-note-item');
 
@@ -132,9 +151,9 @@ export class UIView {
                 listItem.appendChild(svgContainer);
 
                 const noteText = document.createElement('span');
-                noteText.textContent = translate('note_count_incorrect', { 
-                    name: problemData.note.name, 
-                    count: problemData.count 
+                noteText.textContent = translate('note_count_incorrect', {
+                    name: problemData.note.name,
+                    count: problemData.count,
                 });
                 listItem.appendChild(noteText);
                 this.#problemNotesList.appendChild(listItem);
@@ -144,8 +163,15 @@ export class UIView {
     }
 
     setAnswerButtonsState(isCorrect, selectedName, correctName) {
-        this.#answerButtonsContainer.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('is-primary', 'is-info', 'is-success', 'is-danger', 'is-light', 'is-warning');
+        this.#answerButtonsContainer.querySelectorAll('button').forEach((btn) => {
+            btn.classList.remove(
+                'is-primary',
+                'is-info',
+                'is-success',
+                'is-danger',
+                'is-light',
+                'is-warning'
+            );
             if (btn.dataset.noteName === selectedName) {
                 btn.classList.add(isCorrect ? 'is-success' : 'is-danger');
             }
@@ -156,13 +182,13 @@ export class UIView {
     }
 
     toggleAnswerButtons(disabled) {
-        this.#answerButtonsContainer.querySelectorAll('button').forEach(btn => {
+        this.#answerButtonsContainer.querySelectorAll('button').forEach((btn) => {
             btn.disabled = disabled;
         });
     }
 
     resetAnswerButtons() {
-        this.#answerButtonsContainer.querySelectorAll('button').forEach(btn => {
+        this.#answerButtonsContainer.querySelectorAll('button').forEach((btn) => {
             btn.classList.remove('is-success', 'is-danger');
         });
     }

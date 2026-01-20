@@ -7,7 +7,9 @@
   "scripts": {
     "test": "vitest",
     "test:e2e": "playwright test",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,11 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@vitest/coverage-v8": "^4.0.17",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
     "jsdom": "^27.4.0",
+    "prettier": "^3.8.0",
     "serve": "^14.2.5",
     "vitest": "^4.0.17"
   }

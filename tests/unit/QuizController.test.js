@@ -1,6 +1,16 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { QuizController } from '../../src/core/QuizController.js';
 import { NoteService } from '../../src/core/NoteService.js';
+import { SoundService } from '../../src/utils/SoundService.js';
+
+vi.mock('../../src/utils/SoundService.js', () => {
+    return {
+        SoundService: class {
+            playCorrect = vi.fn();
+            playIncorrect = vi.fn();
+        }
+    };
+});
 
 describe('QuizController', () => {
     let quizController;
@@ -35,7 +45,8 @@ describe('QuizController', () => {
             setAnswerButtonsState: vi.fn(),
             toggleAnswerButtons: vi.fn(),
             resetAnswerButtons: vi.fn(),
-            updateCurrentLanguageDisplay: vi.fn()
+            updateCurrentLanguageDisplay: vi.fn(),
+            updateStreak: vi.fn()
         };
 
         quizController = new QuizController(mockNoteService, mockStaffView, mockUIView);
@@ -46,6 +57,18 @@ describe('QuizController', () => {
         expect(mockUIView.bindStartGame).toHaveBeenCalled();
         expect(mockUIView.bindAnswer).toHaveBeenCalled();
         expect(mockUIView.bindKeyboardAnswers).toHaveBeenCalled();
+    });
+
+    it('should track and reset streaks', () => {
+        quizController.startGame('practice', 'g');
+        
+        // Correct answer
+        quizController.handleAnswer('do');
+        expect(mockUIView.updateStreak).toHaveBeenCalledWith(1);
+
+        // Incorrect answer
+        quizController.handleAnswer('re');
+        expect(mockUIView.updateStreak).toHaveBeenCalledWith(0);
     });
 
     it('should start game and show first note', () => {

@@ -1,9 +1,11 @@
 import { applyTranslations, setLanguage } from '../utils/i18n.js';
+import { SoundService } from '../utils/SoundService.js';
 
 export class QuizController {
     #noteService;
     #staffView;
     #uiView;
+    #soundService;
     #score = 0;
     #totalQuestions = 0;
     #incorrectAnswers = {};
@@ -12,6 +14,8 @@ export class QuizController {
     #currentClef = 'g';
     #timerId = null;
     #timeLeft = 0;
+    #streak = 0;
+    #maxStreak = 0;
     #TIME_LIMIT = 60;
     #SPRINT_QUESTIONS_LIMIT = 10;
     #isLocked = false;
@@ -20,6 +24,7 @@ export class QuizController {
         this.#noteService = noteService;
         this.#staffView = staffView;
         this.#uiView = uiView;
+        this.#soundService = new SoundService();
     }
 
     init() {
@@ -41,9 +46,12 @@ export class QuizController {
         this.#score = 0;
         this.#totalQuestions = 0;
         this.#incorrectAnswers = {};
+        this.#streak = 0;
+        this.#maxStreak = 0;
         this.#isLocked = false;
 
         this.#uiView.showScreen('quiz');
+        this.#uiView.updateStreak(0);
 
         if (this.#gameMode === 'time-attack') {
             this.#startTimer();
@@ -61,20 +69,27 @@ export class QuizController {
 
     endGame() {
         this.#stopTimer();
-        
+
+        const highScoreKey = `fasleutel_hs_${this.#gameMode}_${this.#currentClef}`;
+        const currentHS = parseInt(localStorage.getItem(highScoreKey)) || 0;
+        if (this.#score > currentHS) {
+            localStorage.setItem(highScoreKey, this.#score);
+        }
+
         if (window.goatcounter && this.#totalQuestions > 0) {
             window.goatcounter.count({
                 path: 'quiz-completed',
                 title: 'Quiz Completed',
-                event: true
+                event: true,
             });
         }
-        
+
         this.#uiView.showReport({
             score: this.#score,
             totalQuestions: this.#totalQuestions,
             incorrectAnswers: this.#incorrectAnswers,
-            staffView: this.#staffView
+            staffView: this.#staffView,
+            maxStreak: this.#maxStreak,
         });
     }
 
@@ -93,22 +108,29 @@ export class QuizController {
         const isCorrect = selectedName === this.#currentNote.name;
         if (isCorrect) {
             this.#score++;
+            this.#streak++;
+            if (this.#streak > this.#maxStreak) this.#maxStreak = this.#streak;
+            this.#soundService.playCorrect();
         } else {
             const noteId = `${this.#currentNote.name}_${this.#currentNote.octave}_${this.#currentNote.clef}`;
             if (!this.#incorrectAnswers[noteId]) {
                 this.#incorrectAnswers[noteId] = { note: this.#currentNote, count: 0 };
             }
             this.#incorrectAnswers[noteId].count++;
+            this.#streak = 0;
+            this.#soundService.playIncorrect();
         }
 
+        this.#uiView.updateStreak(this.#streak);
         this.#uiView.setAnswerButtonsState(isCorrect, selectedName, this.#currentNote.name);
-        this.#uiView.updateScore(this.#score, 
+        this.#uiView.updateScore(
+            this.#score,
             this.#gameMode === 'sprint' ? this.#SPRINT_QUESTIONS_LIMIT : this.#totalQuestions,
             this.#gameMode
         );
 
         const transitionTime = this.#gameMode === 'time-attack' ? 500 : 1500;
-        
+
         if (this.#gameMode === 'sprint' && this.#totalQuestions >= this.#SPRINT_QUESTIONS_LIMIT) {
             setTimeout(() => this.endGame(), transitionTime);
         } else {
@@ -128,11 +150,11 @@ export class QuizController {
         this.#score = 10;
         this.#totalQuestions = 20;
         this.#incorrectAnswers = {
-            "do_4_g": { note: { name: 'do', octave: 4, y: 3, clef: 'g' }, count: 3 },
-            "fa_5_g": { note: { name: 'fa', octave: 5, y: -2, clef: 'g' }, count: 2 },
-            "mi_2_f": { note: { name: 'mi', octave: 2, y: 3, clef: 'f' }, count: 4 },
-            "la_1_f": { note: { name: 'la', octave: 1, y: 5, clef: 'f' }, count: 1 },
-            "si_4_g": { note: { name: 'si', octave: 4, y: 0, clef: 'g' }, count: 5 }
+            do_4_g: { note: { name: 'do', octave: 4, y: 3, clef: 'g' }, count: 3 },
+            fa_5_g: { note: { name: 'fa', octave: 5, y: -2, clef: 'g' }, count: 2 },
+            mi_2_f: { note: { name: 'mi', octave: 2, y: 3, clef: 'f' }, count: 4 },
+            la_1_f: { note: { name: 'la', octave: 1, y: 5, clef: 'f' }, count: 1 },
+            si_4_g: { note: { name: 'si', octave: 4, y: 0, clef: 'g' }, count: 5 },
         };
         this.endGame();
     }

@@ -20,6 +20,7 @@ describe('App Integration', () => {
             <div id="quiz-screen" class="hidden">
                 <div id="score"></div>
                 <div id="timer" class="hidden"></div>
+                <div id="streak-display" class="hidden"></div>
                 <div id="staff-container"><svg id="staff"></svg></div>
                 <div id="answer-buttons"></div>
                 <button id="back-to-menu">Stop</button>
@@ -58,17 +59,15 @@ describe('App Integration', () => {
     it('should track score correctly through real components', () => {
         quizController.startGame('practice', 'g');
         
-        // Get the current note name (it's random, so we inspect the state via a trick or check buttons)
-        // Since we can't easily see private #currentNote, we'll use the fact that buttons are generated.
-        
-        // Let's simulate clicking all buttons until we hit the right one
-        // or just check if score updates on ANY click.
         const scoreBefore = document.getElementById('score').textContent;
         
+        // Click the first button (it might be correct or incorrect)
         const buttons = document.querySelectorAll('#answer-buttons button');
-        buttons[0].click(); // Click 'do'
+        buttons[0].click();
         
         const scoreAfter = document.getElementById('score').textContent;
+        // The score string should change (either to 1/1 or 0/1)
         expect(scoreAfter).not.toBe(scoreBefore);
+        expect(scoreAfter).toMatch(/Score: (0|1)\/1/);
     });
 });
