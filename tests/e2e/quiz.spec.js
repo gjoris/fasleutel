@@ -71,20 +71,28 @@ test.describe('Muzieknoten Quiz Volledige Functionaliteit', () => {
     await expect(page.locator('#menu-screen h1')).toHaveText('Choisissez un mode');
   });
 
-  test('Thema: Wisselen tussen licht en donker', async ({ page }) => {
+  test('Thema: Cyclen door thema\'s', async ({ page }) => {
     // Check initial state (default light)
-    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 
-    // Click toggle
+    // Click cycle 1: Dark
     await page.click('#theme-toggle');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+
+    // Click cycle 2: Material
+    await page.click('#theme-toggle');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'material');
+
+    // Click cycle 3: Sepia
+    await page.click('#theme-toggle');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'sepia');
 
     // Reload should persist
     await page.reload();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'sepia');
 
-    // Back to light
+    // Click cycle 4: Back to light
     await page.click('#theme-toggle');
-    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   });
 });

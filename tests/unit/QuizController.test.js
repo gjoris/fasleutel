@@ -60,11 +60,18 @@ describe('QuizController', () => {
         expect(mockUIView.setTheme).toHaveBeenCalledWith('dark');
     });
 
-    it('should toggle theme', () => {
+    it('should cycle through themes', () => {
         document.documentElement.setAttribute('data-theme', 'light');
         quizController.toggleTheme();
         expect(mockUIView.setTheme).toHaveBeenCalledWith('dark');
-        expect(localStorage.getItem('fasleutel_theme')).toBe('dark');
+        
+        document.documentElement.setAttribute('data-theme', 'dark');
+        quizController.toggleTheme();
+        expect(mockUIView.setTheme).toHaveBeenCalledWith('material');
+
+        document.documentElement.setAttribute('data-theme', 'sepia');
+        quizController.toggleTheme();
+        expect(mockUIView.setTheme).toHaveBeenCalledWith('light');
     });
 
     it('should initialize correctly and bind events', () => {

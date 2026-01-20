@@ -214,7 +214,11 @@ describe('UIView', () => {
     it('should set theme', () => {
         uiView.setTheme('dark');
         expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
-        expect(document.getElementById('theme-toggle').innerHTML).toContain('☀️');
+        expect(document.getElementById('theme-toggle').innerHTML).toContain('🎨');
+
+        uiView.setTheme('material');
+        expect(document.documentElement.getAttribute('data-theme')).toBe('material');
+        expect(document.getElementById('theme-toggle').innerHTML).toContain('📜');
 
         uiView.setTheme('light');
         expect(document.documentElement.getAttribute('data-theme')).toBe('light');

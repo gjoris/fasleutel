@@ -45,8 +45,12 @@ export class QuizController {
     }
 
     toggleTheme() {
+        const themes = ['light', 'dark', 'material', 'sepia'];
         const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        const currentIndex = themes.indexOf(currentTheme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        const newTheme = themes[nextIndex];
+
         this.#uiView.setTheme(newTheme);
         localStorage.setItem('fasleutel_theme', newTheme);
     }

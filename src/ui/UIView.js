@@ -10,42 +10,54 @@ export class UIView {
     #answerButtonsContainer;
     #reportSummary;
     #problemNotesList;
-        #languageSelector;
-        #currentLangDisplay;
-        #themeToggle;
-        #NOTE_NAMES = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
-    
-        constructor() {
-            this.#menuScreen = document.getElementById('menu-screen');
-            this.#quizScreen = document.getElementById('quiz-screen');
-            this.#reportScreen = document.getElementById('report-screen');
-            this.#scoreDisplay = document.getElementById('score');
-            this.#timerDisplay = document.getElementById('timer');
-            this.#streakDisplay = document.getElementById('streak-display');
-            this.#answerButtonsContainer = document.getElementById('answer-buttons');
-            this.#reportSummary = document.getElementById('report-summary');
-            this.#problemNotesList = document.getElementById('problem-notes');
-            
-            this.#initAnswerButtons();
-    
-            this.#languageSelector = document.querySelector('.dropdown-content');
-            this.#currentLangDisplay = document.getElementById('current-lang-display');
-            this.#themeToggle = document.getElementById('theme-toggle');
+    #languageSelector;
+    #currentLangDisplay;
+    #themeToggle;
+    #NOTE_NAMES = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
+
+    constructor() {
+        this.#menuScreen = document.getElementById('menu-screen');
+        this.#quizScreen = document.getElementById('quiz-screen');
+        this.#reportScreen = document.getElementById('report-screen');
+        this.#scoreDisplay = document.getElementById('score');
+        this.#timerDisplay = document.getElementById('timer');
+        this.#streakDisplay = document.getElementById('streak-display');
+        this.#answerButtonsContainer = document.getElementById('answer-buttons');
+        this.#reportSummary = document.getElementById('report-summary');
+        this.#problemNotesList = document.getElementById('problem-notes');
+
+        this.#initAnswerButtons();
+
+        this.#languageSelector = document.querySelector('.dropdown-content');
+        this.#currentLangDisplay = document.getElementById('current-lang-display');
+        this.#themeToggle = document.getElementById('theme-toggle');
+    }
+
+    bindThemeToggle(handler) {
+        if (this.#themeToggle) {
+            this.#themeToggle.addEventListener('click', handler);
         }
-    
-        bindThemeToggle(handler) {
-            if (this.#themeToggle) {
-                this.#themeToggle.addEventListener('click', handler);
-            }
+    }
+
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+
+        const icons = {
+            light: '🌙',
+
+            dark: '🎨',
+
+            material: '📜',
+
+            sepia: '☀️',
+        };
+
+        if (this.#themeToggle) {
+            this.#themeToggle.innerHTML = `<span class="icon is-small">${icons[theme] || '🌙'}</span>`;
         }
-    
-        setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            if (this.#themeToggle) {
-                this.#themeToggle.innerHTML = `<span class="icon is-small">${theme === 'dark' ? '☀️' : '🌙'}</span>`;
-            }
-        }
-        bindLanguageSwitcher(handler) {
+    }
+
+    bindLanguageSwitcher(handler) {
         this.#languageSelector.addEventListener('click', (event) => {
             if (event.target.classList.contains('dropdown-item')) {
                 event.preventDefault();
